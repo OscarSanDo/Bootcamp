@@ -5,7 +5,7 @@ public class DecodificarCadenas {
 	
 	public static void main(String[] args) {
 	
-		String cadena = "3+4+3,4-7*1=";
+		String cadena = "3+4+3,4-7*1=";		//guarda la cadena original
 		int posicion = 0;
 		String[] operadores = new String[4];
 		operadores[0] = "+";
@@ -13,9 +13,9 @@ public class DecodificarCadenas {
 		operadores[2] = "*";
 		operadores[3] = "=";
 		
-		double Total = 0;
+		double Total = 0;				
 		
-		String cadenaBuscar = "";
+		String cadenaBuscar = "";		//guarda la cadena modificada
 		
 
 		for( int j = 0; j <= cadena.length() - 1; j++ ) {
@@ -37,9 +37,13 @@ public class DecodificarCadenas {
 				
 			}
 		}
-		System.out.println(Total);
+		System.out.println("El resultado de las operaciones de la cadena es " + Total);
 	}
-	private static double Calcular( double total, String numero, String operador ) {
+	
+	
+	
+	
+	public static double Calcular( double total, String numero, String operador ) {  //método para convertir a double y calcular resultado
 		
 		numero = numero.replace(",", ".");
 		switch(operador) {

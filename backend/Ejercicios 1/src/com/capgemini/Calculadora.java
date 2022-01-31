@@ -3,8 +3,8 @@ package com.capgemini;
 public class Calculadora {
 
 	double total = 0;
-	double operando = 0;
-	char operador ='+';
+	//double operando = 0;
+	//char operador ='+';
 	
 	public double calcular(double operando, char operador) {
 		

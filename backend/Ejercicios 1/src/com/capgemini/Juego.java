@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Juego {
 	
-	private int contador = 10;
+	private int intentos = 10;
 	private Random random = new Random();
 	private int numeroRandom = random.nextInt(101);
 	private String mensaje = "";
@@ -15,7 +15,7 @@ public class Juego {
 		}
 
 	public void inicializar() {
-	contador = 10;
+	intentos = 10;
 	numeroRandom = random.nextInt(101);
 	mensaje = "";
 	finalizarJuego = false;
@@ -28,22 +28,22 @@ public class Juego {
 
 
 	if (num > numeroRandom) {
-	mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (contador - 1) + " intentos.";
+	mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (intentos - 1) + " intentos.";
 	} else if (num < numeroRandom) {
-	mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (contador - 1) + " intentos.";
+	mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (intentos - 1) + " intentos.";
 	} else {
-	mensaje = "Has acertado el número secreto, has necesitado " + (10 - (contador - 1)) + " intentos.";
+	mensaje = "Has acertado el número secreto, has necesitado " + (10 - (intentos - 1)) + " intentos.";
 
 
 
 	finalizarJuego = true;
 	return;
 	}
-	contador--;
+	intentos--;
 
 
 
-	if (contador == 0) {
+	if (intentos == 0) {
 	mensaje = "No te quedan intentos, has perido la partida. El número secreto era: "   + num;
 
 

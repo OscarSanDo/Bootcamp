@@ -60,37 +60,37 @@ public class actividadesJavaIniciacion13 {
 			JOptionPane.showMessageDialog(null, "El número introducido no se corresponde con ningún mes");
 		} else {
 			switch(mes){                                 
-            case 1: System.out.print("Enero");
+            case 1: JOptionPane.showMessageDialog(null, "Enero");;
                     break;
-            case 2: System.out.print("Febrero");
+            case 2: JOptionPane.showMessageDialog(null, "Febrero");
                     break;
-            case 3: System.out.print("Marzo");
+            case 3: JOptionPane.showMessageDialog(null, "Marzo");
                     break;
-            case 4: System.out.print("Abril");
+            case 4: JOptionPane.showMessageDialog(null, "Abril");
                     break;
-            case 5: System.out.print("Mayo");
+            case 5: JOptionPane.showMessageDialog(null, "Mayo");
                     break;
-            case 6: System.out.print("Junio");
+            case 6: JOptionPane.showMessageDialog(null, "Junio");
                     break;
-            case 7: System.out.print("Julio");
+            case 7: JOptionPane.showMessageDialog(null, "Julio");
                     break;
-            case 8: System.out.print("Agosto");
+            case 8: JOptionPane.showMessageDialog(null, "Agosto");
                     break;
-            case 9: System.out.print("Septiembre");
+            case 9: JOptionPane.showMessageDialog(null, "Septiembre");
                     break;
-            case 10: System.out.print("Octubre");
+            case 10: JOptionPane.showMessageDialog(null, "Octubre");
                     break;
-            case 11: System.out.print("Noviembre");
+            case 11: JOptionPane.showMessageDialog(null, "Noviembre");
                     break;
-            case 12: System.out.print("Diciembre");
+            case 12: JOptionPane.showMessageDialog(null, "Diciembre");
                     break;
         }
 			if (mes == 4 || mes == 6 || mes == 9 || mes == 11 ) {
-				JOptionPane.showMessageDialog(null, "El mes introducido es  y tiene 30 días");
+				JOptionPane.showMessageDialog(null, "El mes introducido tiene 30 días");
 			}else if (mes == 2) {
-				JOptionPane.showMessageDialog(null, "El mes introducido es  y tiene 28 días");
+				JOptionPane.showMessageDialog(null, "El mes introducido tiene 28 días");
 			}else {
-				JOptionPane.showMessageDialog(null, "El mes introducido es  y tiene 31 días");
+				JOptionPane.showMessageDialog(null, "El mes introducido tiene 31 días");
 			}
 			
 		}

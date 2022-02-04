@@ -1,27 +1,39 @@
 package com.capgemini;
 
+import com.enums.Palos;
+
+
 public class Carta {
 
-	
-	
+		
 	private int numero;
-	private String palo;
+	private Palos palos;
 	
-	public static String[] PALOS = {"Corazones", "Tréboles", "Picas", "Rombos"};
-	public static String[] NUMEROS = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 	
-	public Carta(int numero, String palo) {
+	public Carta(int numero, Palos palo) {
 		this.numero = numero;
-		this.palo = palo;		
+		this.palos = palo;		
 			}
-	
-	public String toString() {
-		return "numero = " + numero + ", palo=" + palo;
+
+
+	public int getNumero() {
+		return numero;
 	}
 
-	
-	
-	
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+
+	public Palos getPalos() {
+		return palos;
+	}
+
+
+	public void setPalos(Palos palos) {
+		this.palos = palos;
+	}
 	
 	
 	

@@ -45,7 +45,7 @@ public class BarajaCartas {
 
 	}
 
-	public void comparar(){
-		
+	public void repartirCarta()                                  {
+		baraja.get(0);
 	}
 }

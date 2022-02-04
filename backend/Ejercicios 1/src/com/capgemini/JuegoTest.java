@@ -20,11 +20,6 @@ class JuegoTest {
 		juego.numeroRandom = 50;
 		}
 
-//	@Test
-//	void testJuego() {
-//		fail("Not yet implemented");
-//	}
-
 	@Test
 	void testInicializar() {
 		juego.numeroRandom = -1;
@@ -66,20 +61,12 @@ class JuegoTest {
 		}
 	
 
-//	@Test
-//	void testGetMensaje() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	void testGetTerminado() {
-//		fail("Not yet implemented");
-//	}
+
 	}
-	
+	private int intentos;
 	@Test
-	void intentos()  {
-		for (int i=0; i<10; i++) {
+	void PruebaIntentos()  {
+		for  (intentos=0; intentos<10; intentos++) {
 		juego.jugada(56);
 		}
 		assertAll("Jugada",

@@ -22,8 +22,8 @@ public class SepararCadena {
 //		}
 		
 	//System.out.println("El resultado es " + resultado);
-	resultado = calculadora.dividir(6.00, 3.00);
-	System.out.println("El resultado es " + resultado);
+//	resultado = calculadora.dividir(6.00, 3.00);
+//	System.out.println("El resultado es " + resultado);
 	}
 	
 	

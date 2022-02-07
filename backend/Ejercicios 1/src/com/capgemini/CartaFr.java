@@ -1,15 +1,15 @@
 package com.capgemini;
 
-import com.enums.Palos;
+import com.enums.PalosFr;
 
-public class Carta {
+public class CartaFr {
 
 	private int numero; // eliminar
-	private Palos palos;
+	private PalosFr palos;
 	private int valor;
 	private String etiqueta;
 
-	public Carta(int numero, Palos palo, int valor, String etiqueta) {
+	public CartaFr(int numero, PalosFr palo, int valor, String etiqueta) {
 		this.numero = numero;
 		this.palos = palo;
 		this.valor = valor;
@@ -40,11 +40,11 @@ public class Carta {
 		this.numero = numero;
 	}
 
-	public Palos getPalos() {
+	public PalosFr getPalos() {
 		return palos;
 	}
 
-	public void setPalos(Palos palos) {
+	public void setPalos(PalosFr palos) {
 		this.palos = palos;
 	}
 

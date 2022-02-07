@@ -5,82 +5,86 @@ import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
-import com.enums.Palos;
+
+import com.enums.PalosFr;
 import com.enums.TipoJuego;
 
-public class BarajaCartas {
+public class BarajaCartasFr {
 
-	public ArrayList<Carta> baraja;
+	public ArrayList<CartaFr> baraja;
+	
 
-	public BarajaCartas(TipoJuego tipoJuego) {
+	public BarajaCartasFr(TipoJuego tipoJuego) {
 		crearBaraja(tipoJuego);
-	}
-
-	public void juegoBlackJack() {
-
-		baraja = new ArrayList<>();
-
-		for (Palos palo : Palos.values()) { // for each
-			for (int i = 1; i <= 13; i++) {
-				switch (i) {
-				case 1:
-					baraja.add(new Carta(i, palo, 11, "AS"));
-					break;
-				case 11:
-					baraja.add(new Carta(i, palo, 10, "J"));
-					break;
-				case 12:
-					baraja.add(new Carta(i, palo, 10, "Q"));
-					break;
-				case 13:
-					baraja.add(new Carta(i, palo, 10, "K"));
-					break;
-				default:
-					baraja.add(new Carta(i, palo, i, Integer.toString(i)));
-					break;
-				}
-			}
-		}
-
-	}
-
-	public void juegoPoker() {
-
-		baraja = new ArrayList<>();
-
-		for (Palos palo : Palos.values()) { // for each
-			for (int i = 1; i <= 13; i++) {
-				switch (i) {
-				case 1:
-					baraja.add(new Carta(i, palo, 14, "AS"));
-					break;
-				case 11:
-					baraja.add(new Carta(i, palo, 11, "J"));
-					break;
-				case 12:
-					baraja.add(new Carta(i, palo, 12, "Q"));
-					break;
-				case 13:
-					baraja.add(new Carta(i, palo, 13, "K"));
-					break;
-				default:
-					baraja.add(new Carta(i, palo, i, Integer.toString(i)));
-					break;
-				}
-			}
-		}
-
 	}
 
 	public void crearBaraja(TipoJuego tipoJuego) {
 
 		if (tipoJuego == TipoJuego.BLACKJACK) {
-			juegoBlackJack();
+			barajaBlackJack();
 		} else if (tipoJuego == TipoJuego.POKER) {
-			juegoPoker();
+			barajaPoker();
 		}
 
 	}
+	
+	public void barajaBlackJack() {
+
+		baraja = new ArrayList<>();
+
+		for (PalosFr palo : PalosFr.values()) { // for each
+			for (int i = 1; i <= 13; i++) {
+				switch (i) {
+				case 1:
+					baraja.add(new CartaFr(i, palo, 11, "AS"));
+					break;
+				case 11:
+					baraja.add(new CartaFr(i, palo, 10, "J"));
+					break;
+				case 12:
+					baraja.add(new CartaFr(i, palo, 10, "Q"));
+					break;
+				case 13:
+					baraja.add(new CartaFr(i, palo, 10, "K"));
+					break;
+				default:
+					baraja.add(new CartaFr(i, palo, i, Integer.toString(i)));
+					break;
+				}
+			}
+		}
+
+	}
+
+	public void barajaPoker() {
+
+		baraja = new ArrayList<>();
+
+		for (PalosFr palo : PalosFr.values()) { // for each
+			for (int i = 1; i <= 13; i++) {
+				switch (i) {
+				case 1:
+					baraja.add(new CartaFr(i, palo, 14, "AS"));
+					break;
+				case 11:
+					baraja.add(new CartaFr(i, palo, 11, "J"));
+					break;
+				case 12:
+					baraja.add(new CartaFr(i, palo, 12, "Q"));
+					break;
+				case 13:
+					baraja.add(new CartaFr(i, palo, 13, "K"));
+					break;
+				default:
+					baraja.add(new CartaFr(i, palo, i, Integer.toString(i)));
+					break;
+				}
+			}
+		}
+
+	}
+	
+
 
 	public void mostrarBaraja() {
 		for (int i = 0; i < baraja.size(); i++) {
@@ -100,7 +104,7 @@ public class BarajaCartas {
 		baraja.remove(0);
 	}
 
-	public void compararValorCarta(Carta carta1, Carta carta2) {
+	public void compararValorCarta(CartaFr carta1, CartaFr carta2) {
 		if (carta1.getValor() == carta2.getValor()) {
 			JOptionPane.showMessageDialog(null, ("Las cartas comparadas son iguales"));
 		} else if (carta1.getValor() > carta2.getValor()) {

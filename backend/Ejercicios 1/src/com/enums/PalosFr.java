@@ -1,11 +1,10 @@
 package com.enums;
 
-public enum Palos {
+public enum PalosFr {
 
 	CORAZONES, TREBOLES, PICAS , ROMBOS;
 	
 	
-
 	}
 	
 

@@ -9,12 +9,12 @@ import javax.swing.JOptionPane;
 import com.enums.PalosFr;
 import com.enums.TipoJuego;
 
-public class BarajaCartasFr {
+public class BarajaFr {
 
 	public ArrayList<CartaFr> baraja;
 	
 
-	public BarajaCartasFr(TipoJuego tipoJuego) {
+	public BarajaFr(TipoJuego tipoJuego) {
 		crearBaraja(tipoJuego);
 	}
 

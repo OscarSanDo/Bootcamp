@@ -1,26 +1,25 @@
 package com.capgemini;
 
 import com.enums.PalosEsp;
-import com.enums.ValoresBarajaEspComp;
+import com.enums.ValoresBarajaEspInc;
 
-public class CartaEsp extends Carta <PalosEsp, ValoresBarajaEspComp>{
-
+public class CartaEspInc extends Carta <PalosEsp, ValoresBarajaEspInc>{
 	private PalosEsp palos;
-	private ValoresBarajaEspComp valor;
+	private ValoresBarajaEspInc valor;
 	
 
-	public CartaEsp(PalosEsp palos, ValoresBarajaEspComp valor) {
+	public CartaEspInc(PalosEsp palos, ValoresBarajaEspInc valor) {
 		super(palos, valor);
 		this.palos = palos;
 		this.valor = valor;
 
 	}
 
-	public ValoresBarajaEspComp getValor() {
+	public ValoresBarajaEspInc getValor() {
 		return valor;
 	}
 
-	public void setValor(ValoresBarajaEspComp valor) {
+	public void setValor(ValoresBarajaEspInc valor) {
 		this.valor = valor;
 	}
 

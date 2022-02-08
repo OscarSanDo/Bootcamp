@@ -15,7 +15,7 @@ public class JuegoCartaMasAltaFr {
 	public static void comenzarJuego() {
 
 		int jugador1, jugador2;
-		BarajaCartasFr barajaNueva = new BarajaCartasFr(TipoJuego.POKER);
+		BarajaFr barajaNueva = new BarajaFr(TipoJuego.POKER);
 		barajaNueva.barajar();
 
 		

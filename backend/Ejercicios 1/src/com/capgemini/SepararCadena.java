@@ -5,11 +5,11 @@ public class SepararCadena {
 	public static void main(String[] args) {
 	
 		
-		String cadena = "3+4+3,4-7*1=";
-		cadena = cadena.replace(",", ".");
-		String[] cadena_separada = cadena.split("(?<=[-+*/()])");
-		Calculadora calculadora = new Calculadora();
-		double resultado = 0;
+//		String cadena = "3+4+3,4-7*1=";
+//		cadena = cadena.replace(",", ".");
+//		String[] cadena_separada = cadena.split("(?<=[-+*/()])");
+//		Calculadora calculadora = new Calculadora();
+//		double resultado = 0;
 
 //		for (int i = 0; i < cadena_separada.length; i++) {
 //

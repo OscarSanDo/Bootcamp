@@ -16,8 +16,8 @@ public class Tablero {
         return null;
     }
 	
-	private boolean esValido (int i) {
-		return true;
+	private boolean esValido (int i) {		//comprobar si la i está entre el 1 y el 8
+		return (i>= 1 && i <= 8);
 	}
 	
 	public boolean hayPieza (Posicion posicion) {

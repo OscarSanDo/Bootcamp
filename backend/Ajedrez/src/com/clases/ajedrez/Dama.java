@@ -10,7 +10,11 @@ public class Dama extends Pieza{
 
 	@Override
 	protected boolean esValido (Movimiento movimiento, Tablero tablero) {
-		return true;
+		if( movimiento.deltaColumna() == movimiento.deltaFila() ) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }

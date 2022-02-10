@@ -10,7 +10,11 @@ public class Alfil extends Pieza {
 
 	@Override
 	protected boolean esValido (Movimiento movimiento, Tablero tablero) {
-		return true;
+		if( movimiento.esDiagonal()){
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }

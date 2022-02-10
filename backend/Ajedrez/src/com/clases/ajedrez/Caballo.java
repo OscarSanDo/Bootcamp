@@ -10,7 +10,17 @@ public class Caballo extends Pieza {
 
 	@Override
 	protected boolean esValido (Movimiento movimiento, Tablero tablero) {
-		return true;
+		if( movimiento.esHorizontal() || movimiento.esVertical()){
+			if( movimiento.deltaColumna() == 2 && movimiento.deltaFila() == 1 ) {
+				return true;
+			}else if(movimiento.deltaColumna() == 1 && movimiento.deltaFila() == 2) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
 	}
 	
 	

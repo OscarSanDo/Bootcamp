@@ -23,8 +23,9 @@ public abstract class Pieza{
 	protected abstract boolean esValido(Movimiento movimiento, Tablero tablero);
 	
 	public void mover (Movimiento movimiento, Tablero tablero) {
+		System.out.println("Esto en Clase Pieza");
 		if (esValido(movimiento, tablero)) {
-			
+			tablero.mover(movimiento);
 		}
 	}
 	

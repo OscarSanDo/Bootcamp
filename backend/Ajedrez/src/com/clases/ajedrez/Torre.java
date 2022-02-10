@@ -10,7 +10,11 @@ public class Torre extends Pieza{
 
 	@Override
 	protected boolean esValido (Movimiento movimiento, Tablero tablero) {
-		return true;
+		if( movimiento.esHorizontal() || movimiento.esVertical()){
+			return true;
+		}else {
+			return false;
+		}
 	}
 	
 }

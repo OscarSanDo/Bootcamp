@@ -4,11 +4,11 @@ import com.ajedrez.enums.Color;
 
 public class Tablero {
 
-	Pieza[][] piezas = new Pieza[8][8];
+	Pieza[][] piezas = new Pieza[8][8];	//casillas del tablero
 	
 	
 	public Pieza GetEscaque(int fila, int columna) {
-        return null;
+        return piezas[fila][columna];
     }
 	
 	
@@ -33,7 +33,7 @@ public class Tablero {
 	}
 	
 	public void mover (Movimiento movimiento) {
-		
+		//s = piezas[movimiento.getPosFin().getFila()][movimiento.getPosFin().getColumna()];
 	}
 	
 	public Object clone() {

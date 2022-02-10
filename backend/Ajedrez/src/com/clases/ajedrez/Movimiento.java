@@ -6,14 +6,15 @@ public class Movimiento {
 	private Posicion posFin;
 
 	public Movimiento(String posicion) throws JuegoException {
+
 		posIni = new Posicion(posicion.charAt(0), posicion.charAt(1));
 		posFin = new Posicion(posicion.charAt(2), posicion.charAt(3));
 		if (posFin.equals(posIni)) {
 			throw new JuegoException("La posición incial tiene que ser distinata de la posición final");
+		} else if (posicion.length() != 4) {
+			throw new JuegoException("La posición incial tiene que ser distinata de la posición final");
 		}
-//			else if (posIni. != 4 && posFin != 4){
-//				throw new JuegoException("La posición incial tiene que ser distinata de la posición final");
-//			}
+
 	}
 
 	public Posicion getPosIni() {

@@ -19,7 +19,7 @@ public class Posicion {
 
 	}
 
-	public Posicion(char fila, char columna) throws JuegoException {
+	public Posicion(char columna, char fila) throws JuegoException {
 
 		if (columna >= 'A' && columna <= 'H') {
 			this.columna = columna - 'A' + 1;

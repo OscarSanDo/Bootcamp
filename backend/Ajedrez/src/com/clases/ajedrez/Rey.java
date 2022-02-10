@@ -10,6 +10,10 @@ public class Rey extends Pieza{
 
 	@Override
 	protected boolean esValido (Movimiento movimiento, Tablero tablero) {
-		return true;
+		if( movimiento.esHorizontal() || movimiento.esVertical() && movimiento.deltaColumna() == 1){
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

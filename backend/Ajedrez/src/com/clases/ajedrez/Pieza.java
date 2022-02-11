@@ -17,13 +17,11 @@ public abstract class Pieza{
 
 	public void setColor(Color color) {
 		this.color = color;
-	}
-	
+	}	
 	
 	protected abstract boolean esValido(Movimiento movimiento, Tablero tablero);
 	
-	public void mover (Movimiento movimiento, Tablero tablero) {
-		System.out.println("Esto en Clase Pieza");
+	public void mover (Movimiento movimiento, Tablero tablero) throws JuegoException {
 		if (esValido(movimiento, tablero)) {
 			tablero.mover(movimiento);
 		}

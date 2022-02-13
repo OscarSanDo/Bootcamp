@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"com.clases.ajedrez","l":"Juego"},{"p":"com.clases.ajedrez","l":"Pieza"},{"p":"com.clases.ajedrez","l":"Posicion"}];updateSearchResults();

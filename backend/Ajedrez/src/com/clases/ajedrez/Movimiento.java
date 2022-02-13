@@ -25,44 +25,44 @@ public class Movimiento {
 		return posFin;
 	}
 
-	public boolean esVertical() { // fila distinta columna igual
+	public boolean esVertical() {
 		return (posFin.getColumna() == posIni.getColumna());
 	}
 
-	public boolean esHorizontal() { // fila igual columna distinta
+	public boolean esHorizontal() {
 		return (posFin.getFila() == posIni.getFila());
 	}
 
-	public boolean esDiagonal() { // salta las mismas filas que columnas
+	public boolean esDiagonal() {
 		return (saltoVertical() == saltoHorizontal());
 	}
 
-	public int saltoVertical() { // diferencia de filas fila-fila (valor absoluto para que no incordie el signo)
+	public int saltoVertical() {
 		return Math.abs(posFin.getFila() - posIni.getFila());
 	}
 
-	public int saltoHorizontal() { // diferencia de columnas columna-columna (valor absoluto para que no incordie
-									// el signo)
+	public int saltoHorizontal() {
 		return Math.abs(posFin.getColumna() - posIni.getColumna());
 	}
 
-	public int deltaFila() { // comprobar si hay piezas intermedias pasando por cada casilla que hay en el
-								// camino
+	public int deltaFila() {
 		int delta = 0;
-		if (posFin.getFila() > posIni.getFila()) {
+
+		if (posIni.getFila() < posFin.getFila()) {
 			delta = 1;
-		} else {
+		} else if (posIni.getFila() > posFin.getFila()) {
 			delta = -1;
 		}
+
 		return delta;
+
 	}
 
-	public int deltaColumna() { // comprobar que el movimiento es hacia delante, si la columna inicial menor que
-								// la final +1 si no -1
+	public int deltaColumna() {
 		int delta = 0;
-		if (posFin.getColumna() > posIni.getColumna()) {
+		if (posIni.getColumna() < posFin.getColumna()) {
 			delta = 1;
-		} else {
+		} else if (posIni.getColumna() > posFin.getColumna()) {
 			delta = -1;
 		}
 		return delta;

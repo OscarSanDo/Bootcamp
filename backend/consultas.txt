@@ -1,0 +1,14 @@
+Obtener todos los actores de nombre ‘NICK’.
+SELECT first_name FROM actor WHERE first_name = 'NICK'
+Obtener una lista con todos los distritos distintos (district en address).
+SELECT DISTINCT district FROM address
+Obtener las películas sobre agentes secretos (description contiene ‘Secret Agent’).
+SELECT title FROM film WHERE description LIKE '%ecret Agent%'
+Mostrar la lista de las películas mas caras 
+SELECT title Peliculas_mas_caras FROM film ORDER BY rental_rate/LENGTH DESC 9
+
+
+
+Obtener los 5 nombres de actor más repetidos (aprox). 
+SELECT first_name, COUNT(first_name) FROM actor GROUP BY first_name ORDER BY  COUNT(first_name) DESC LIMIT 5 
+

@@ -2,7 +2,7 @@ package com.clases.ajedrez;
 
 /**
  * @author Oscar Sánchez Domingo
- * @version 1.0.0 02/2022 6
+ * @version 1.0.0 02/2022 
  */
 import com.ajedrez.enums.Color;
 

@@ -1,14 +1,27 @@
 Obtener todos los actores de nombre ‘NICK’.
 SELECT first_name FROM actor WHERE first_name = 'NICK'
+
 Obtener una lista con todos los distritos distintos (district en address).
 SELECT DISTINCT district FROM address
+
 Obtener las películas sobre agentes secretos (description contiene ‘Secret Agent’).
 SELECT title FROM film WHERE description LIKE '%ecret Agent%'
+
 Mostrar la lista de las películas mas caras 
 SELECT title Peliculas_mas_caras FROM film ORDER BY rental_rate/LENGTH DESC 9
 
-
-
+Obtener los códigos y medias de gasto de los clientes que han gastado mas de 100 en menos de 25 operaciones.
+SELECT customer_id Id_Cliente, AVG(amount) Media_gasto 
+FROM payment
+GROUP BY Id_Cliente
+HAVING COUNT(amount) < 25 AND SUM(amount)>100
 Obtener los 5 nombres de actor más repetidos (aprox). 
-SELECT first_name, COUNT(first_name) FROM actor GROUP BY first_name ORDER BY  COUNT(first_name) DESC LIMIT 5 
+SELECT first_name, COUNT(first_name) FROM actor 
+GROUP BY first_name ORDER BY  COUNT(first_name) DESC LIMIT 5 
+
+Para felicitar el año nuevo chino se necesita el listado con los datos postales de los clientes residentes en China y Taiwan
+SELECT CO.country, CI.city, AD.address, AD.postal_code, CU.first_name, CU.last_name
+FROM country CO, city CI, address AD,  customer CU
+WHERE CO.country_id=CI.country_id AND CI.city_id=AD.city_id AND AD.address_id=CU.address_id 
+AND (CO.country = 'China' OR CO.country = 'Taiwan')
 

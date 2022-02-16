@@ -44,6 +44,36 @@ INNER JOIN inventory inv
 ON inv.store_id = sto.store_id
 GROUP BY sto.store_id
 
+Obtener el listado detallado de alquileres indicando el identificador de alquiler,
+el titulo alquilado, las fechas de alquiler, devolución y tiempo transcurrido, nombres del cliente 
+(nombre con apellidos), empleado (nombre con apellidos) y tienda (ciudad, país).
+SELECT rent.rental_id, fi.title, rent.rental_date, rent.return_date,
+CONCAT(DATEDIFF(rent.return_date, rent.rental_date), ' dias') AS tiempo_transcurrido,
+CONCAT (cus.first_name, ' ', cus.last_name) AS NOMBRE, 
+CONCAT (sta.first_name, ' ', sta.last_name) AS NOMBRE_STAFF,
+ci.city, con.country
+FROM rental rent
+INNER JOIN inventory inv
+ON inv.inventory_id = rent.inventory_id
+INNER JOIN film fi
+ON inv.film_id = fi.film_id
+INNER JOIN customer cus
+ON cus.customer_id = rent.customer_id
+INNER JOIN staff sta
+ON sta.staff_id = rent.staff_id
+INNER JOIN store sto
+ON sta.staff_id = sto.manager_staff_id
+INNER JOIN address addr
+ON sto.address_id = addr.address_id
+INNER JOIN city ci 
+ON addr.city_id = ci.city_id
+INNER JOIN country con
+ON con.country_id = ci.country_id
+ORDER BY rent.rental_id
+
+
+
+
 
 
 

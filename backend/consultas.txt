@@ -71,7 +71,28 @@ INNER JOIN country con
 ON con.country_id = ci.country_id
 ORDER BY rent.rental_id
 
-
+Generar la lista diaria de alquileres vencidos no devueltos para poder llamar a los clientes y pedirles que los devuelvan,
+para ello debe mostrar las fechas de alquiler y vencimiento, el teléfono y nombre del cliente, 
+así como el titulo de la película, priorizando los que mas tiempo llevan vencidos.
+SELECT  fi.title, rent.rental_date, rent.return_date,
+DATE_ADD(rent.rental_date, interval fi.rental_duration DAY) AS fecha_devolución,
+CONCAT (cus.first_name, ' ', cus.last_name) AS NOMBRE_CLIENTE,
+addr.phone AS TELEFONO_CLIENTE
+FROM rental rent
+INNER JOIN inventory inv
+ON inv.inventory_id = rent.inventory_id
+INNER JOIN film fi
+ON inv.film_id = fi.film_id
+INNER JOIN customer cus
+ON cus.customer_id = rent.customer_id
+INNER JOIN address addr
+ON cus.address_id = addr.address_id
+INNER JOIN city ci 
+ON addr.city_id = ci.city_id
+INNER JOIN country con
+ON con.country_id = ci.country_id
+WHERE rent.return_date IS NULL AND CURRENT_TIMESTAMP > DATE_ADD(rent.rental_date, interval fi.rental_duration DAY)
+ORDER BY fecha_devolución
 
 
 

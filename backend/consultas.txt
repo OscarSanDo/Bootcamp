@@ -25,3 +25,25 @@ FROM country CO, city CI, address AD,  customer CU
 WHERE CO.country_id=CI.country_id AND CI.city_id=AD.city_id AND AD.address_id=CU.address_id 
 AND (CO.country = 'China' OR CO.country = 'Taiwan')
 
+Mostrar los datos de las tiendas, conocidas por la ciudad y país donde están ubicadas,
+indicando el nombre del gerente, el numero de películas en inventario, el numero de títulos diferentes 
+y el número de clientes atendidos.
+SELECT sto.store_id, con.country, ci.city, CONCAT (sta.first_name, ' ', sta.last_name) AS NOMBRE, 
+COUNT(inv.film_id) AS Numero_Peliculas, COUNT(Distinct inv.film_id) AS Peliculas_Diferentes,
+(SELECT COUNT(distinct customer_id) FROM rental) AS clientes_atendidos
+FROM store sto
+INNER JOIN address addr
+ON sto.address_id = addr.address_id
+INNER JOIN city ci 
+ON addr.city_id = ci.city_id
+INNER JOIN country con
+ON con.country_id = ci.country_id
+INNER JOIN staff sta
+ON sta.staff_id = sto.manager_staff_id
+INNER JOIN inventory inv
+ON inv.store_id = sto.store_id
+GROUP BY sto.store_id
+
+
+
+

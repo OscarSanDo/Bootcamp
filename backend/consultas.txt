@@ -1,26 +1,30 @@
 Obtener todos los actores de nombre â€˜NICKâ€™.
-SELECT first_name FROM actor WHERE first_name = 'NICK'
+SELECT * FROM actor WHERE first_name = 'NICK'
 
 Obtener una lista con todos los distritos distintos (district en address).
-SELECT DISTINCT district FROM address
+SELECT DISTINCT district FROM address ORDER BY district
 
 Obtener las pelÃ­culas sobre agentes secretos (description contiene â€˜Secret Agentâ€™).
-SELECT title FROM film WHERE description LIKE '%ecret Agent%'
+SELECT title FROM film WHERE description LIKE '%Secret Agent%'
 
 Mostrar la lista de las pelÃ­culas mas caras 
-SELECT title Peliculas_mas_caras FROM film ORDER BY rental_rate/LENGTH DESC 9
+SELECT title Peliculas_mas_caras, LENGTH, rental_rate/LENGTH Precio
+FROM film 
+ORDER BY Precio DESC 
 
 Obtener los cÃ³digos y medias de gasto de los clientes que han gastado mas de 100 en menos de 25 operaciones.
 SELECT customer_id Id_Cliente, AVG(amount) Media_gasto 
 FROM payment
 GROUP BY Id_Cliente
 HAVING COUNT(amount) < 25 AND SUM(amount)>100
+ORDER BY Media_gasto DESC
+
 Obtener los 5 nombres de actor mÃ¡s repetidos (aprox). 
 SELECT first_name, COUNT(first_name) FROM actor 
 GROUP BY first_name ORDER BY  COUNT(first_name) DESC LIMIT 5 
 
 Para felicitar el aÃ±o nuevo chino se necesita el listado con los datos postales de los clientes residentes en China y Taiwan
-SELECT CO.country, CI.city, AD.address, AD.postal_code, CU.first_name, CU.last_name
+SELECT CO.country, CI.city, AD.address, AD.postal_code, CONCAT (CU.first_name, ' ', CU.last_name) AS NOMBRE
 FROM country CO, city CI, address AD,  customer CU
 WHERE CO.country_id=CI.country_id AND CI.city_id=AD.city_id AND AD.address_id=CU.address_id 
 AND (CO.country = 'China' OR CO.country = 'Taiwan')
@@ -28,20 +32,17 @@ AND (CO.country = 'China' OR CO.country = 'Taiwan')
 Mostrar los datos de las tiendas, conocidas por la ciudad y paÃ­s donde estÃ¡n ubicadas,
 indicando el nombre del gerente, el numero de pelÃ­culas en inventario, el numero de tÃ­tulos diferentes 
 y el nÃºmero de clientes atendidos.
-SELECT sto.store_id, con.country, ci.city, CONCAT (sta.first_name, ' ', sta.last_name) AS NOMBRE, 
-COUNT(inv.film_id) AS Numero_Peliculas, COUNT(Distinct inv.film_id) AS Peliculas_Diferentes,
+SELECT sto.store_id, con.country, ci.city, 
+CONCAT (sta.first_name, ' ', sta.last_name) AS NOMBRE, 
+COUNT(inv.film_id) AS Numero_Peliculas, 
+COUNT(Distinct inv.film_id) AS Peliculas_Diferentes,
 (SELECT COUNT(distinct customer_id) FROM rental) AS clientes_atendidos
 FROM store sto
-INNER JOIN address addr
-ON sto.address_id = addr.address_id
-INNER JOIN city ci 
-ON addr.city_id = ci.city_id
-INNER JOIN country con
-ON con.country_id = ci.country_id
-INNER JOIN staff sta
-ON sta.staff_id = sto.manager_staff_id
-INNER JOIN inventory inv
-ON inv.store_id = sto.store_id
+INNER JOIN address addr ON sto.address_id = addr.address_id
+INNER JOIN city ci ON addr.city_id = ci.city_id
+INNER JOIN country con ON con.country_id = ci.country_id
+INNER JOIN staff sta ON sta.staff_id = sto.manager_staff_id
+INNER JOIN inventory inv ON inv.store_id = sto.store_id
 GROUP BY sto.store_id
 
 Obtener el listado detallado de alquileres indicando el identificador de alquiler,
@@ -51,71 +52,48 @@ SELECT rent.rental_id, fi.title, rent.rental_date, rent.return_date,
 CONCAT(DATEDIFF(rent.return_date, rent.rental_date), ' dias') AS tiempo_transcurrido,
 CONCAT (cus.first_name, ' ', cus.last_name) AS NOMBRE, 
 CONCAT (sta.first_name, ' ', sta.last_name) AS NOMBRE_STAFF,
-ci.city, con.country
+CONCAT (ci.city, ' ', con.country) AS DIRECCIÓN_TIENDA
 FROM rental rent
-INNER JOIN inventory inv
-ON inv.inventory_id = rent.inventory_id
-INNER JOIN film fi
-ON inv.film_id = fi.film_id
-INNER JOIN customer cus
-ON cus.customer_id = rent.customer_id
-INNER JOIN staff sta
-ON sta.staff_id = rent.staff_id
-INNER JOIN store sto
-ON sta.staff_id = sto.manager_staff_id
-INNER JOIN address addr
-ON sto.address_id = addr.address_id
-INNER JOIN city ci 
-ON addr.city_id = ci.city_id
-INNER JOIN country con
-ON con.country_id = ci.country_id
+INNER JOIN inventory inv ON inv.inventory_id = rent.inventory_id
+INNER JOIN film fi ON inv.film_id = fi.film_id
+INNER JOIN customer cus ON cus.customer_id = rent.customer_id
+INNER JOIN staff sta ON sta.staff_id = rent.staff_id
+INNER JOIN store sto ON sta.staff_id = sto.manager_staff_id
+INNER JOIN address addr ON sto.address_id = addr.address_id
+INNER JOIN city ci ON addr.city_id = ci.city_id
+INNER JOIN country con ON con.country_id = ci.country_id
 ORDER BY rent.rental_id
 
 Generar la lista diaria de alquileres vencidos no devueltos para poder llamar a los clientes y pedirles que los devuelvan,
 para ello debe mostrar las fechas de alquiler y vencimiento, el teléfono y nombre del cliente, 
 así como el titulo de la película, priorizando los que mas tiempo llevan vencidos.
-SELECT  fi.title, rent.rental_date, rent.return_date,
+SELECT  fi.title, rent.rental_date, 
 DATE_ADD(rent.rental_date, interval fi.rental_duration DAY) AS fecha_devolución,
 CONCAT (cus.first_name, ' ', cus.last_name) AS NOMBRE_CLIENTE,
 addr.phone AS TELEFONO_CLIENTE
 FROM rental rent
-INNER JOIN inventory inv
-ON inv.inventory_id = rent.inventory_id
-INNER JOIN film fi
-ON inv.film_id = fi.film_id
-INNER JOIN customer cus
-ON cus.customer_id = rent.customer_id
-INNER JOIN address addr
-ON cus.address_id = addr.address_id
-INNER JOIN city ci 
-ON addr.city_id = ci.city_id
-INNER JOIN country con
-ON con.country_id = ci.country_id
-WHERE rent.return_date IS NULL AND CURRENT_TIMESTAMP > DATE_ADD(rent.rental_date, interval fi.rental_duration DAY)
+INNER JOIN inventory inv ON inv.inventory_id = rent.inventory_id
+INNER JOIN film fi ON inv.film_id = fi.film_id 
+INNER JOIN customer cus ON cus.customer_id = rent.customer_id
+INNER JOIN address addr ON cus.address_id = addr.address_id
+WHERE rent.return_date IS NULL 
+AND CURRENT_TIMESTAMP > DATE_ADD(rent.rental_date, interval fi.rental_duration DAY)
 ORDER BY fecha_devolución
 
 Elaborar el ranking de los países que más alquilan las películas de GINA DEGENERES.
-SELECT CONCAT(act.first_name, ' ', act.last_name) AS NOMBRE, cou.country, COUNT(cou.country) Num_alquileres
+SELECT RANK() over(ORDER BY COUNT(*) DESC) ranking, CONCAT(act.first_name, ' ', act.last_name) AS NOMBRE, cou.country, COUNT(cou.country) Num_alquileres
 FROM actor act
-INNER JOIN film_actor filac
-ON filac.actor_id=act.actor_id
-INNER JOIN film fil
-ON fil.film_id=filac.film_id
-INNER JOIN inventory inv
-ON fil.film_id=inv.film_id
-INNER JOIN rental rent
-ON inv.inventory_id=rent.inventory_id
-INNER JOIN customer cus
-ON rent.customer_id=cus.customer_id
-INNER JOIN address addr
-ON cus.address_id=addr.address_id
-INNER JOIN city cit
-ON addr.city_id=cit.city_id
-INNER JOIN country cou
-ON cit.country_id=cou.country_id
+INNER JOIN film_actor filac ON filac.actor_id=act.actor_id
+INNER JOIN film fil ON fil.film_id=filac.film_id
+INNER JOIN inventory inv ON fil.film_id=inv.film_id
+INNER JOIN rental rent ON inv.inventory_id=rent.inventory_id
+INNER JOIN customer cus ON rent.customer_id=cus.customer_id
+INNER JOIN address addr ON cus.address_id=addr.address_id
+INNER JOIN city cit ON addr.city_id=cit.city_id
+INNER JOIN country cou ON cit.country_id=cou.country_id
 WHERE act.first_name = 'GINA' AND act.last_name = 'DEGENERES'
 GROUP BY cou.country
-ORDER BY Num_alquileres DESC 
+ORDER BY ranking, cou.country
 
 
 

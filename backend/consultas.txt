@@ -94,6 +94,29 @@ ON con.country_id = ci.country_id
 WHERE rent.return_date IS NULL AND CURRENT_TIMESTAMP > DATE_ADD(rent.rental_date, interval fi.rental_duration DAY)
 ORDER BY fecha_devolución
 
+Elaborar el ranking de los países que más alquilan las películas de GINA DEGENERES.
+SELECT CONCAT(act.first_name, ' ', act.last_name) AS NOMBRE, cou.country, COUNT(cou.country) Num_alquileres
+FROM actor act
+INNER JOIN film_actor filac
+ON filac.actor_id=act.actor_id
+INNER JOIN film fil
+ON fil.film_id=filac.film_id
+INNER JOIN inventory inv
+ON fil.film_id=inv.film_id
+INNER JOIN rental rent
+ON inv.inventory_id=rent.inventory_id
+INNER JOIN customer cus
+ON rent.customer_id=cus.customer_id
+INNER JOIN address addr
+ON cus.address_id=addr.address_id
+INNER JOIN city cit
+ON addr.city_id=cit.city_id
+INNER JOIN country cou
+ON cit.country_id=cou.country_id
+WHERE act.first_name = 'GINA' AND act.last_name = 'DEGENERES'
+GROUP BY cou.country
+ORDER BY Num_alquileres DESC 
+
 
 
 

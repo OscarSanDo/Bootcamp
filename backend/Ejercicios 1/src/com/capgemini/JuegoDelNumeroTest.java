@@ -7,16 +7,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-class JuegoTest {
+class JuegoDelNumeroTest {
 
 	
-	Juego juego;
+	JuegoDelNumero juego;
 	
 
 
 	@BeforeEach
 	void setUp() throws Exception {
-		juego = new Juego();
+		juego = new JuegoDelNumero();
 		juego.numeroRandom = 50;
 		}
 

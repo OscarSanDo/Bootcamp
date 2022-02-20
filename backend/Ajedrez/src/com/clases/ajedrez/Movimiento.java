@@ -14,7 +14,7 @@ public class Movimiento {
 		} else if (posicion.length() != 4) {
 			throw new JuegoException("La posición incial tiene que ser distinata de la posición final");
 		}
-
+		
 	}
 
 	public Posicion getPosIni() {

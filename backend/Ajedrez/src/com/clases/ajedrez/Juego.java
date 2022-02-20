@@ -18,7 +18,7 @@ public class Juego {
 	 */
 	public Tablero getTablero() throws CloneNotSupportedException, JuegoException {
 		if (partidaActiva) {
-			return (Tablero) elTablero.clonarTablero();
+			return (Tablero) elTablero.clone();
 		} else {
 			throw new JuegoException("No se ha iniciado la partida");
 		}

@@ -10,13 +10,12 @@ import com.ajedrez.enums.Color;
 public abstract class Pieza {
 
 	private Color color;
-
+	
 	/**
 	 * Constructor
 	 * 
 	 * @param Enum Color
 	 */
-
 	public Pieza(Color color) {
 
 		this.color = color;
@@ -45,6 +44,18 @@ public abstract class Pieza {
 		if (esValido(movimiento, tablero)) {
 			tablero.mover(movimiento);
 		}
+	}
+	
+	public boolean puedeComer(Pieza piezaDestino) throws JuegoException {
+		
+		if (piezaDestino.getColor() != this.color) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean puedeSaltar() {
+		return false;
 	}
 
 }

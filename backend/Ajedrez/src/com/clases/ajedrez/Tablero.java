@@ -58,9 +58,10 @@ public class Tablero implements Cloneable {
 
 		if (!posicionInicio.equals(posicionFinal) && !hayPiezasEntre(movimiento)) {
 			Pieza piezaDestino = damePieza(posicionFinal);
+			
 			if (piezaDestino != null && piezaDestino.getColor() != piezaMovida.getColor()) {
 				QuitaPieza(posicionFinal);
-			} else if (piezaDestino != null && piezaDestino.getColor() == piezaMovida.getColor()) {
+			} else if (piezaDestino != null && piezaMovida.puedeComer(piezaDestino)) {
 				throw new JuegoException("Hay una pieza del mismo color");
 			}
 			piezas[posicionFinal.getColumna()][posicionFinal
@@ -72,10 +73,11 @@ public class Tablero implements Cloneable {
 
 	}
 
-	public Object clonarTablero() throws CloneNotSupportedException {
+	@Override
+	protected Object clone() throws CloneNotSupportedException {
 		return this.clone();
 	}
-
+	
 	public Color colorEscaque(int columna, int fila) {
 		if ((columna % 2) == (fila % 2)) {
 			return Color.BLANCO;
@@ -115,7 +117,6 @@ public class Tablero implements Cloneable {
 		}
 
 		if (movimiento.esDiagonal()) {
-
 			for (int i = 1; i <= movimientos; i++) {
 				movCol = movCol + movimiento.deltaColumna();
 				movFila = movFila + movimiento.deltaFila();

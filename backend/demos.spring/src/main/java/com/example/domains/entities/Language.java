@@ -2,8 +2,18 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.Length;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -13,30 +23,48 @@ import java.util.List;
 @Entity
 @Table(name="language")
 @NamedQuery(name="Language.findAll", query="SELECT l FROM Language l")
-public class Language implements Serializable {
+public class Language extends EntityBase<Language> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="language_id")
+	@JsonProperty("id")
 	private int languageId;
 
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
-
+	
+	@NotBlank
+	@Length(max = 20)
+	@JsonProperty("idioma")
 	private String name;
 
 	//bi-directional many-to-one association to Film
 	@OneToMany(mappedBy="language")
+	@JsonIgnore
 	private List<Film> films;
 
 	//bi-directional many-to-one association to Film
 	@OneToMany(mappedBy="languageVO")
+	@JsonIgnore
 	private List<Film> filmsVO;
 
 	public Language() {
 	}
 
+	public Language(int languageId) {
+		super();
+		this.languageId = languageId;
+	}
+
+	public Language(int languageId, String name) {
+		super();
+		this.languageId = languageId;
+		this.name = name;
+	}
+	
 	public int getLanguageId() {
 		return this.languageId;
 	}
@@ -104,5 +132,19 @@ public class Language implements Serializable {
 
 		return filmsVO;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(languageId);
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Language))
+			return false;
+		Language other = (Language) obj;
+		return languageId == other.languageId;
+	}
 }

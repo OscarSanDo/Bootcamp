@@ -111,4 +111,10 @@ public class Country extends EntityBase<Country> implements Serializable {
 		Country other = (Country) obj;
 		return countryId == other.countryId;
 	}
+
+	@Override
+	public String toString() {
+		return "Country [countryId=" + countryId + ", country=" + country + ", lastUpdate=" + lastUpdate + "]";
+	}
+	
 }

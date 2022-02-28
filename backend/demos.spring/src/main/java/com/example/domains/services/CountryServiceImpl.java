@@ -4,28 +4,29 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.domains.contracts.repositories.CategoryRepository;
-import com.example.domains.contracts.services.CategoryService;
-import com.example.domains.entities.Category;
+
+import com.example.domains.contracts.repositories.CountryRepository;
+import com.example.domains.contracts.services.CountryService;
+import com.example.domains.entities.Country;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
-	private CategoryRepository dao;
+public class CountryServiceImpl implements CountryService {
+	private CountryRepository dao;
 	
-	public CategoryServiceImpl(CategoryRepository dao) {
+	public CountryServiceImpl(CountryRepository dao) {
 		this.dao = dao;
 	}
 	
 	@Override
-	public List<Category> getAll() {
+	public List<Country> getAll() {
 		return dao.findAll();
 	}
 	
 	@Override
-	public Category getOne(Integer id) throws NotFoundException {
+	public Country getOne(Integer id) throws NotFoundException {
 		var item = dao.findById(id);
 		if(item.isEmpty())
 			throw new NotFoundException();
@@ -33,30 +34,30 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	
 	@Override
-	public Category add(Category item) throws DuplicateKeyException, InvalidDataException {
+	public Country add(Country item) throws DuplicateKeyException, InvalidDataException {
 		if(item == null)
 			throw new IllegalArgumentException();
-		if(dao.findById(item.getCategoryId()).isPresent())
+		if(dao.findById(item.getCountryId()).isPresent())
 			throw new DuplicateKeyException();
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
 		return dao.save(item);
 	}
 	@Override
-	public Category change(Category item) throws NotFoundException, InvalidDataException  {
+	public Country change(Country item) throws NotFoundException, InvalidDataException  {
 		if(item == null)
 			throw new IllegalArgumentException();
-		if(dao.findById(item.getCategoryId()).isEmpty())
+		if(dao.findById(item.getCountryId()).isEmpty())
 			throw new NotFoundException();
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
 		return dao.save(item);
 	}
 	@Override
-	public void delete(Category item) {
+	public void delete(Country item) {
 		if(item == null)
 			throw new IllegalArgumentException();
-		deleteById(item.getCategoryId());
+		deleteById(item.getCountryId());
 		
 	}
 	@Override

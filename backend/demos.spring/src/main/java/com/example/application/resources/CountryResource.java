@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.domains.contracts.services.CategoryService;
-import com.example.domains.entities.Category;
+import com.example.domains.contracts.services.CountryService;
+import com.example.domains.entities.Country;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
@@ -31,36 +31,36 @@ import com.example.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoryResource {
+@RequestMapping("/api/paises")
+public class CountryResource {
 	@Autowired
-	private CategoryService srv;
+	private CountryService srv;
 
 	@GetMapping
-	public List<Category> getAll() {
+	public List<Country> getAll() {
 		return srv.getAll();
 	}
 
 	@GetMapping(path = "/{id}")
-	public Category getOne(@PathVariable int id) throws NotFoundException {
+	public Country getOne(@PathVariable int id) throws NotFoundException {
 		return srv.getOne(id);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody Category item) throws InvalidDataException, DuplicateKeyException {
+	public ResponseEntity<Object> create(@Valid @RequestBody Country item) throws InvalidDataException, DuplicateKeyException {
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
 		item = srv.add(item);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-			.buildAndExpand(item.getCategoryId()).toUri();
+			.buildAndExpand(item.getCountryId()).toUri();
 		return ResponseEntity.created(location).build();
 
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void update(@PathVariable int id, @Valid @RequestBody Category item) throws InvalidDataException, NotFoundException {
-		if(id != item.getCategoryId())
+	public void update(@PathVariable int id, @Valid @RequestBody Country item) throws InvalidDataException, NotFoundException {
+		if(id != item.getCountryId())
 			throw new InvalidDataException("No coinciden los identificadore");
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());

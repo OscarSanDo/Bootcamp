@@ -22,8 +22,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.domains.contracts.services.CategoryService;
-import com.example.domains.entities.Category;
+import com.example.application.dtos.ActorDTO;
+import com.example.domains.contracts.services.ActorService;
+import com.example.domains.entities.Actor;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
@@ -31,40 +32,42 @@ import com.example.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoryResource {
+@RequestMapping("/api/actores")
+public class ActorResource {
 	@Autowired
-	private CategoryService srv;
+	private ActorService srv;
 
 	@GetMapping
-	public List<Category> getAll() {
-		return srv.getAll();
+	public List<ActorDTO> getAll() {
+		return srv.getByProjection(ActorDTO.class);
 	}
 
 	@GetMapping(path = "/{id}")
-	public Category getOne(@PathVariable int id) throws NotFoundException {
-		return srv.getOne(id);
+	public ActorDTO getOne(@PathVariable int id) throws NotFoundException {
+		return ActorDTO.from(srv.getOne(id));
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody Category item) throws InvalidDataException, DuplicateKeyException {
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		item = srv.add(item);
+	public ResponseEntity<Object> create(@Valid @RequestBody ActorDTO item) throws InvalidDataException, DuplicateKeyException {
+		Actor actor = ActorDTO.from(item);
+		if(actor.isInvalid())
+			throw new InvalidDataException(actor.getErrorsMessage());
+		actor = srv.add(actor);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-			.buildAndExpand(item.getCategoryId()).toUri();
+			.buildAndExpand(actor.getActorId()).toUri();
 		return ResponseEntity.created(location).build();
 
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void update(@PathVariable int id, @Valid @RequestBody Category item) throws InvalidDataException, NotFoundException {
-		if(id != item.getCategoryId())
+	public void update(@PathVariable int id, @Valid @RequestBody ActorDTO item) throws InvalidDataException, NotFoundException {
+		if(id != item.getActorId())
 			throw new InvalidDataException("No coinciden los identificadore");
-		if(item.isInvalid())
-			throw new InvalidDataException(item.getErrorsMessage());
-		srv.change(item);
+		Actor actor = ActorDTO.from(item);
+		if(actor.isInvalid())
+			throw new InvalidDataException(actor.getErrorsMessage());
+		srv.change(actor);
 	}
 
 	@DeleteMapping("/{id}")

@@ -2,8 +2,19 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.validator.constraints.Length;
+
+import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -13,21 +24,27 @@ import java.util.List;
 @Entity
 @Table(name="country")
 @NamedQuery(name="Country.findAll", query="SELECT c FROM Country c")
-public class Country implements Serializable {
+public class Country extends EntityBase<Country> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="country_id")
+	@JsonProperty("id")
 	private int countryId;
-
+	
+	@NotBlank
+	@Length(max = 50)
+	@JsonProperty("pais")
 	private String country;
 
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to City
 	@OneToMany(mappedBy="country")
+	@JsonIgnore
 	private List<City> cities;
 
 	public Country() {
@@ -78,5 +95,20 @@ public class Country implements Serializable {
 
 		return city;
 	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(countryId);
+	}
 
+		
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Country))
+			return false;
+		Country other = (Country) obj;
+		return countryId == other.countryId;
+	}
 }

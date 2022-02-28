@@ -95,7 +95,6 @@ public class Address implements Serializable {
 		this.lastUpdate = lastUpdate;
 	}
 
-
 	public String getPhone() {
 		return this.phone;
 	}

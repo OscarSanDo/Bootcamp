@@ -8,6 +8,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.Length;
 
+import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -31,10 +32,11 @@ public class Category extends EntityBase<Category> implements Serializable {
 	@Column(name="category_id")
 	@JsonProperty("id")
 	private int categoryId;
-	
-	@Generated(value = GenerationTime.ALWAYS)
+
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
+
 	@NotBlank
 	@Length(max = 25)
 	@JsonProperty("categoria")
@@ -48,15 +50,15 @@ public class Category extends EntityBase<Category> implements Serializable {
 	public Category() {
 	}
 
+	public Category(int categoryId) {
+		super();
+		this.categoryId = categoryId;
+	}
+
 	public Category(int categoryId, String name) {
 		super();
 		this.categoryId = categoryId;
 		this.name = name;
-	}
-
-	public Category(int categoryId) {
-		super();
-		this.categoryId = categoryId;
 	}
 
 	public int getCategoryId() {
@@ -120,7 +122,5 @@ public class Category extends EntityBase<Category> implements Serializable {
 		return categoryId == other.categoryId;
 	}
 
-	
-	
 	
 }

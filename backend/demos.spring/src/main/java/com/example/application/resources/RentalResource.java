@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.application.dtos.RentalDetailsDTO;
 import com.example.application.dtos.RentalShortDTO;
 import com.example.domains.contracts.services.RentalService;
 import com.example.exceptions.DuplicateKeyException;
@@ -56,11 +57,11 @@ public class RentalResource {
 		return srv.getByProjection(page, RentalShortDTO.class);
 	}
 
-//	@GetMapping(path = "/{id}")
-//	public FilmDetailsDTO getOneDetails(@PathVariable int id, @RequestParam(required = false, defaultValue = "details") String mode)
-//			throws NotFoundException {
-//			return FilmDetailsDTO.from(srv.getOne(id));
-//	}
+	@GetMapping(path = "/{id}")
+	public RentalDetailsDTO getOneDetails(@PathVariable int id, @RequestParam(required = false, defaultValue = "details") String mode)
+			throws NotFoundException {
+			return RentalDetailsDTO.from(srv.getOne(id));
+	}
 //	@GetMapping(path = "/{id}", params = "mode=edit")
 //	@ApiOperation(value = "Recupera una película")
 //	@ApiResponses({
@@ -72,7 +73,7 @@ public class RentalResource {
 //			throws NotFoundException {
 //			return FilmEditDTO.from(srv.getOne(id));
 //	}
-//
+
 //	@PostMapping
 //	@Transactional
 //	@ApiOperation(value = "Añadir una nueva película")
@@ -114,14 +115,14 @@ public class RentalResource {
 //			throw new InvalidDataException(entity.getErrorsMessage());
 //		srv.change(entity);
 //	}
-//
-//	@DeleteMapping("/{id}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	@ApiOperation(value = "Borrar una película existente")
-//	@ApiResponses({
-//		@ApiResponse(code = 204, message = "Película borrada"),
-//		@ApiResponse(code = 404, message = "Película no encontrada")
-//	})
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@ApiOperation(value = "Borrar una película existente")
+	@ApiResponses({
+		@ApiResponse(code = 204, message = "Película borrada"),
+		@ApiResponse(code = 404, message = "Película no encontrada")
+	})
 	public void delete(@ApiParam(value = "Identificador de alquileres") @PathVariable int id) {
 		srv.deleteById(id);
 	}

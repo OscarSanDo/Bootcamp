@@ -10,7 +10,6 @@ import org.hibernate.validator.constraints.Length;
 
 import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -30,12 +29,10 @@ public class Country extends EntityBase<Country> implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="country_id")
-	@JsonProperty("id")
 	private int countryId;
-	
+
 	@NotBlank
 	@Length(max = 50)
-	@JsonProperty("pais")
 	private String country;
 
 	@Column(name="last_update")
@@ -48,6 +45,17 @@ public class Country extends EntityBase<Country> implements Serializable {
 	private List<City> cities;
 
 	public Country() {
+	}
+
+	public Country(int countryId) {
+		super();
+		this.countryId = countryId;
+	}
+
+	public Country(int countryId, @NotBlank @Length(max = 50) String country) {
+		super();
+		this.countryId = countryId;
+		this.country = country;
 	}
 
 	public int getCountryId() {
@@ -95,13 +103,12 @@ public class Country extends EntityBase<Country> implements Serializable {
 
 		return city;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(countryId);
 	}
 
-		
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -116,5 +123,5 @@ public class Country extends EntityBase<Country> implements Serializable {
 	public String toString() {
 		return "Country [countryId=" + countryId + ", country=" + country + ", lastUpdate=" + lastUpdate + "]";
 	}
-	
+
 }

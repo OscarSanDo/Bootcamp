@@ -56,41 +56,41 @@ public class FilmResource {
 		return srv.getByProjection(page, ActorDTO.class);
 	}
 
-	@GetMapping(path = "/{id}")
-	public CiudadDetailsDTO getOneDetails(@PathVariable int id, @RequestParam(required = false, defaultValue = "details") String mode)
-			throws NotFoundException {
-			return CiudadDetailsDTO.from(srv.getOne(id));
-	}
-	@GetMapping(path = "/{id}", params = "mode=edit")
-	public CiudadEditDTO getOneEdit(@PathVariable int id, @RequestParam(required = true) String mode)
-			throws NotFoundException {
-			return CiudadEditDTO.from(srv.getOne(id));
-	}
-
-	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody CiudadEditDTO item)
-			throws InvalidDataException, DuplicateKeyException {
-		var entity = CiudadEditDTO.from(item);
-		if (entity.isInvalid())
-			throw new InvalidDataException(entity.getErrorsMessage());
-		entity = srv.add(entity);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(entity.getCityId()).toUri();
-		return ResponseEntity.created(location).build();
-
-	}
-
-	@PutMapping("/{id}")
-	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void update(@PathVariable int id, @Valid @RequestBody CiudadEditDTO item)
-			throws InvalidDataException, NotFoundException {
-		if (id != item.getCityId())
-			throw new InvalidDataException("No coinciden los identificadores");
-		var entity = CiudadEditDTO.from(item);
-		if (entity.isInvalid())
-			throw new InvalidDataException(entity.getErrorsMessage());
-		srv.change(entity);
-	}
+//	@GetMapping(path = "/{id}")
+//	public CiudadDetailsDTO getOneDetails(@PathVariable int id, @RequestParam(required = false, defaultValue = "details") String mode)
+//			throws NotFoundException {
+//			return CiudadDetailsDTO.from(srv.getOne(id));
+//	}
+//	@GetMapping(path = "/{id}", params = "mode=edit")
+//	public CiudadEditDTO getOneEdit(@PathVariable int id, @RequestParam(required = true) String mode)
+//			throws NotFoundException {
+//			return CiudadEditDTO.from(srv.getOne(id));
+//	}
+//
+//	@PostMapping
+//	public ResponseEntity<Object> create(@Valid @RequestBody CiudadEditDTO item)
+//			throws InvalidDataException, DuplicateKeyException {
+//		var entity = CiudadEditDTO.from(item);
+//		if (entity.isInvalid())
+//			throw new InvalidDataException(entity.getErrorsMessage());
+//		entity = srv.add(entity);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+//				.buildAndExpand(entity.getCityId()).toUri();
+//		return ResponseEntity.created(location).build();
+//
+//	}
+//
+//	@PutMapping("/{id}")
+//	@ResponseStatus(HttpStatus.ACCEPTED)
+//	public void update(@PathVariable int id, @Valid @RequestBody CiudadEditDTO item)
+//			throws InvalidDataException, NotFoundException {
+//		if (id != item.getCityId())
+//			throw new InvalidDataException("No coinciden los identificadores");
+//		var entity = CiudadEditDTO.from(item);
+//		if (entity.isInvalid())
+//			throw new InvalidDataException(entity.getErrorsMessage());
+//		srv.change(entity);
+//	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

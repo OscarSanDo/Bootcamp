@@ -60,13 +60,14 @@ public class RentalResource {
 	}
 
 	@GetMapping(path = "/{id}")
+	@ApiOperation(value = "Recuperar un alquiler por Id")
 	public RentalDetailsDTO getOneDetails(@PathVariable int id,
 			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
 		return RentalDetailsDTO.from(srv.getOne(id));
 	}
 
 	@GetMapping(path = "/{id}", params = "mode=edit")
-	@ApiOperation(value = "Recupera una película")
+	@ApiOperation(value = "Recupera un alquiler")
 	@ApiResponses({ @ApiResponse(code = 200, message = "Alquiler encontrado"),
 			@ApiResponse(code = 404, message = "Alquiler no encontrado") })
 	public RentalEditDTO getOneEdit(@ApiParam(value = "Identificador del alquiler") @PathVariable int id,
@@ -79,8 +80,7 @@ public class RentalResource {
 	@Transactional
 	@ApiOperation(value = "Añadir un alquiler nuevo")
 	@ApiResponses({ @ApiResponse(code = 201, message = "Alquiler añadido"),
-			@ApiResponse(code = 400, message = "Error al validar los credatos o clave duplicada"),
-
+			@ApiResponse(code = 400, message = "Error al validar o clave duplicada"),
 	})
 	public ResponseEntity<Object> create(@Valid @RequestBody RentalEditDTO item)
 			throws InvalidDataException, DuplicateKeyException, NotFoundException {
@@ -88,14 +88,17 @@ public class RentalResource {
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
 		entity = srv.add(entity);
-//		item.update(entity);
-//		srv.change(entity);
+		item.update(entity);
+		srv.change(entity);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(entity.getRentalId()).toUri();
 		return ResponseEntity.created(location).build();
-
 	}
-
+	
+		@ApiOperation(value = "Actualizar valores alquiler")
+	@ApiResponses({ @ApiResponse(code = 202, message = "Alquiler actualizado"),
+			@ApiResponse(code = 404, message = "Error al actualizar datos"),
+	})
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	@Transactional

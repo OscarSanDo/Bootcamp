@@ -8,9 +8,11 @@ import com.example.domains.entities.Payment;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Value;
 
 @Value
+@ApiModel(value = "Pagos detallado", description = "Version detallada de los pagos.")
 public class PaymentDetailsDTO {
 
 	@JsonProperty("id")

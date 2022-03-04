@@ -70,7 +70,7 @@ public class Rental extends EntityBase<Rental> implements Serializable {
 
 	public Rental() {
 		super();
-		payments = new ArrayList<Payment>();
+		payments = new ArrayList<Payment>(); 
 	}
 
 	public Rental(int rentalId) {

@@ -24,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Value;
 
 @Value
-@ApiModel(value = "Película editable", description = "Version editable de las películas.")
+@ApiModel(value = "Alquiler editable", description = "Version editable de los Alquileres.")
 public class RentalEditDTO {
 	
 	@JsonProperty("id")
@@ -34,16 +34,16 @@ public class RentalEditDTO {
 	private Date rentalDate;		
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date returnDate;	
-	@ApiModelProperty(value = "Nombre del cliente.")
+	@ApiModelProperty(value = "Identificador del cliente.")
 	@PositiveOrZero
 	private int customerId;	
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Identificador del inventario")
 	@PositiveOrZero
 	private int inventoryId;
-	@ApiModelProperty(value = "")
+	@ApiModelProperty(value = "Identificador del empleado")
 	@PositiveOrZero
 	private int staffId;
-	@ApiModelProperty(value = "Lista de identificadores de actores.")
+	@ApiModelProperty(value = "Lista de los pagos realizados.")
 	private List<PaymentEditDTO> payments;
 	
 

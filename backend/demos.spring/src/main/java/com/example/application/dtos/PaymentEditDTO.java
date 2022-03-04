@@ -9,9 +9,11 @@ import com.example.domains.entities.Staff;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Value;
 
 @Value
+@ApiModel(value = "Pagos editable", description = "Version editable de los pagos.")
 public class PaymentEditDTO {
 
 	@JsonProperty("id")
@@ -24,12 +26,19 @@ public class PaymentEditDTO {
 	private Date fecha;
 
 	public static PaymentEditDTO from(Payment source) {
-		return new PaymentEditDTO(source.getPaymentId(), source.getStaff().getStaffId(), source.getAmount(),
+		return new PaymentEditDTO(
+				source.getPaymentId(),
+				source.getStaff().getStaffId(), 
+				source.getAmount(),
 				source.getPaymentDate());
 	}
 
 	public static Payment from(PaymentEditDTO source, Rental rental) {
-		return new Payment(source.getPaymentId(), source.getAmount(), source.getFecha(), new Staff(source.getStaff()),
+		return new Payment(
+				source.getPaymentId(), 
+				source.getAmount(), 
+				source.getFecha(), 
+				new Staff(source.getStaff()),
 				rental);
 	}
 

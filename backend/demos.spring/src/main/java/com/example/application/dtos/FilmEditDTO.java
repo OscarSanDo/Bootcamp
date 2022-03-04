@@ -116,32 +116,24 @@ public class FilmEditDTO {
 		target.setLength(length);
 		target.setReplacementCost(replacementCost);
 		target.setRating(rating == null ? null : Film.Rating.getEnum(rating));
-//ENTITY(1,3,5)
-//DTO(1,7)
+
 		// Borra los actores que sobran
 		var delActores = target.getFilmActors().stream()
 				.filter(item -> !actores.contains(item.getActor().getActorId()))
 				.toList();
 		delActores.forEach(item -> target.removeFilmActor(item));
+		
 		// Añade los actores que falta
 		actores.stream()
 			.filter(idActorDTO -> !target.getFilmActors().stream().anyMatch(filmActor -> filmActor.getActor().getActorId() == idActorDTO))
 			.forEach(idActorDTO -> target.addFilmActor(new Actor(idActorDTO)));
-//			.forEach(idActorDTO -> {
-//				var filmActor = new FilmActor();
-//				filmActor.setFilm(target);
-//				filmActor.setActor(new Actor(idActorDTO));
-//				var pk = new FilmActorPK();
-//				pk.setActorId(idActorDTO);
-//				pk.setFilmId(filmId);
-//				filmActor.setId(pk);
-//				target.getFilmActors().add(filmActor);
-//			});
+
 		// Borra las categorias que sobran
 		var delCategorias = target.getFilmCategories().stream()
 				.filter(item -> !categorias.contains(item.getCategory().getCategoryId()))
 				.toList();
 		delCategorias.forEach(item -> target.removeFilmCategory(item));
+		
 		// Añade las categorias que falta
 		categorias.stream()
 			.filter(idCategoriaDTO -> target.getFilmCategories().stream().noneMatch(filmCategory -> filmCategory.getCategory().getCategoryId() == idCategoriaDTO))

@@ -3,8 +3,12 @@ package com.example.application.dtos;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import com.example.domains.entities.Film;
+
+import javax.transaction.Transactional;
+
+
 import com.example.domains.entities.Rental;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Value;
@@ -15,26 +19,30 @@ public class RentalDetailsDTO {
 	private int rentalId;
 	@JsonProperty("pelicula")
 	private String filmName;
-	@JsonProperty("fechaAlquilado")
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date rentalDate;
-	@JsonProperty("fechaDevuelto")
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Date returnDate;
 	@JsonProperty("cliente")
 	private String customer;
 	@JsonProperty("inventario")
 	private int inventory;
-	@JsonProperty("staff")
+	@JsonProperty("empleado")
 	private String staff;
+	private List<Integer> payments;
+	
 
 	public static RentalDetailsDTO from(Rental source) {
 		return new RentalDetailsDTO(
 				source.getRentalId(), 
 				source.getInventory().getFilm().getTitle(), 
 				source.getRentalDate(),
-				source.getReturnDate(), 
+				source.getReturnDate() == null ? null : source.getReturnDate(), 
 				source.getCustomer().getFirstName() + " " + source.getCustomer().getLastName(),
 				source.getInventory().getInventoryId(),
-				source.getStaff().getFirstName() + " " + source.getStaff().getLastName()); 
+				source.getStaff().getFirstName() + " " + source.getStaff().getLastName(),
+				null
+				); 
 				
 	}
 }

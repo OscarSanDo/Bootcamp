@@ -13,7 +13,7 @@ import com.example.application.dtos.ActorShortDTO;
 import com.example.domains.entities.Actor;
 
 @RepositoryRestResource(exported = false)
-public interface ActorRepositoy extends JpaRepository<Actor, Integer> {
+public interface ActorRepository extends JpaRepository<Actor, Integer> {
 
 	<T> List<T> findByActorIdIsNotNull(Class<T> type);
 	<T> Iterable<T> findByActorIdIsNotNull(Sort sort, Class<T> type);

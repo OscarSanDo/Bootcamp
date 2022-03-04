@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import com.example.application.dtos.ActorDTO;
 import com.example.application.dtos.ActorShortDTO;
-import com.example.domains.contracts.repositories.ActorRepositoy;
+import com.example.domains.contracts.repositories.ActorRepository;
 import com.example.domains.contracts.services.ActorService;
 import com.example.domains.entities.Actor;
 import com.example.exceptions.DuplicateKeyException;

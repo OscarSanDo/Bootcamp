@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.application.dtos.RentalDetailsDTO;
+import com.example.application.dtos.RentalEditDTO;
 import com.example.application.dtos.RentalShortDTO;
 import com.example.domains.contracts.services.RentalService;
 import com.example.exceptions.DuplicateKeyException;
@@ -39,90 +40,81 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @RequestMapping("/api/alquileres")
-@Api(value = "/alquileres", description = "Mantenimiento de alquileres", produces = "application/json, application/xml", consumes="application/json, application/xml")
+@Api(value = "/alquileres", description = "Mantenimiento de alquileres", produces = "application/json, application/xml", consumes = "application/json, application/xml")
 public class RentalResource {
 	@Autowired
 	private RentalService srv;
 
-
 	@GetMapping
 	@ApiOperation(value = "Listado de alquileres")
+	@Transactional
 	public List<RentalShortDTO> getAll() {
 		return srv.getByProjection(RentalShortDTO.class);
 	}
 
 	@GetMapping(params = "page")
 	@ApiOperation(value = "Listado paginable de alquileres")
+	@Transactional
 	public Page<RentalShortDTO> getAll(@ApiParam(required = false) Pageable page) {
 		return srv.getByProjection(page, RentalShortDTO.class);
 	}
 
 	@GetMapping(path = "/{id}")
-	public RentalDetailsDTO getOneDetails(@PathVariable int id, @RequestParam(required = false, defaultValue = "details") String mode)
-			throws NotFoundException {
-			return RentalDetailsDTO.from(srv.getOne(id));
+	public RentalDetailsDTO getOneDetails(@PathVariable int id,
+			@RequestParam(required = false, defaultValue = "details") String mode) throws NotFoundException {
+		return RentalDetailsDTO.from(srv.getOne(id));
 	}
-//	@GetMapping(path = "/{id}", params = "mode=edit")
-//	@ApiOperation(value = "Recupera una película")
-//	@ApiResponses({
-//		@ApiResponse(code = 200, message = "Película encontrada"),
-//		@ApiResponse(code = 404, message = "Película no encontrada")
-//	})
-//	public FilmEditDTO getOneEdit(@ApiParam(value = "Identificador de la película") @PathVariable int id, 
-//			@ApiParam(value = "Versión completa o editable", required = false, allowableValues = "details,edit", defaultValue = "edit") @RequestParam() String mode)
-//			throws NotFoundException {
-//			return FilmEditDTO.from(srv.getOne(id));
-//	}
 
-//	@PostMapping
-//	@Transactional
-//	@ApiOperation(value = "Añadir una nueva película")
-//	@ApiResponses({
-//		@ApiResponse(code = 201, message = "Película añadida"),
-//		@ApiResponse(code = 400, message = "Error al validar los datos o clave duplicada"),
-//		@ApiResponse(code = 404, message = "Película no encontrada")
-//	})
-//	public ResponseEntity<Object> create(@Valid @RequestBody FilmEditDTO item)
-//			throws InvalidDataException, DuplicateKeyException, NotFoundException {
-//		var entity = FilmEditDTO.from(item);
-//		if (entity.isInvalid())
-//			throw new InvalidDataException(entity.getErrorsMessage());
-//		entity = srv.add(entity);
+	@GetMapping(path = "/{id}", params = "mode=edit")
+	@ApiOperation(value = "Recupera una película")
+	@ApiResponses({ @ApiResponse(code = 200, message = "Alquiler encontrado"),
+			@ApiResponse(code = 404, message = "Alquiler no encontrado") })
+	public RentalEditDTO getOneEdit(@ApiParam(value = "Identificador del alquiler") @PathVariable int id,
+			@ApiParam(value = "Versión completa o editable", required = false, allowableValues = "details,edit", defaultValue = "edit") @RequestParam() String mode)
+			throws NotFoundException {
+		return RentalEditDTO.from(srv.getOne(id));
+	}
+
+	@PostMapping
+	@Transactional
+	@ApiOperation(value = "Añadir un alquiler nuevo")
+	@ApiResponses({ @ApiResponse(code = 201, message = "Alquiler añadido"),
+			@ApiResponse(code = 400, message = "Error al validar los credatos o clave duplicada"),
+
+	})
+	public ResponseEntity<Object> create(@Valid @RequestBody RentalEditDTO item)
+			throws InvalidDataException, DuplicateKeyException, NotFoundException {
+		var entity = RentalEditDTO.from(item);
+		if (entity.isInvalid())
+			throw new InvalidDataException(entity.getErrorsMessage());
+		entity = srv.add(entity);
 //		item.update(entity);
 //		srv.change(entity);
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//				.buildAndExpand(entity.getFilmId()).toUri();
-//		return ResponseEntity.created(location).build();
-//
-//	}
-//
-//	@PutMapping("/{id}")
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	@Transactional
-//	@ApiOperation(value = "Modificar una película existente", notes = "Los identificadores deben coincidir")
-//	@ApiResponses({
-//		@ApiResponse(code = 201, message = "Película añadida"),
-//		@ApiResponse(code = 400, message = "Error al validar los datos o discrepancias en los identificadores"),
-//		@ApiResponse(code = 404, message = "Película no encontrada")
-//	})
-//	public void update(@ApiParam(value = "Identificador de la película") @PathVariable int id, @Valid @RequestBody FilmEditDTO item)
-//			throws InvalidDataException, NotFoundException {
-//		if (id != item.getFilmId())
-//			throw new InvalidDataException("No coinciden los identificadores");
-//		var entity = srv.getOne(id);
-//		item.update(entity);
-//		if (entity.isInvalid())
-//			throw new InvalidDataException(entity.getErrorsMessage());
-//		srv.change(entity);
-//	}
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(entity.getRentalId()).toUri();
+		return ResponseEntity.created(location).build();
+
+	}
+
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	@Transactional
+	public void update(@PathVariable int id, @Valid @RequestBody RentalEditDTO item)
+			throws InvalidDataException, NotFoundException {
+		if (id != item.getRentalId())
+			throw new InvalidDataException("No coinciden los identificadores");
+		var entity = srv.getOne(id);
+		item.update(entity);
+		if (entity.isInvalid())
+			throw new InvalidDataException(entity.getErrorsMessage());
+		srv.change(entity);
+	}
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@ApiOperation(value = "Borrar una película existente")
-	@ApiResponses({
-		@ApiResponse(code = 204, message = "Película borrada"),
-		@ApiResponse(code = 404, message = "Película no encontrada")
-	})
+	@ApiOperation(value = "Borrar un alquiler existente")
+	@ApiResponses({ @ApiResponse(code = 204, message = "Alquiler borrado"),
+			@ApiResponse(code = 404, message = "Alquiler no encontrado") })
 	public void delete(@ApiParam(value = "Identificador de alquileres") @PathVariable int id) {
 		srv.deleteById(id);
 	}

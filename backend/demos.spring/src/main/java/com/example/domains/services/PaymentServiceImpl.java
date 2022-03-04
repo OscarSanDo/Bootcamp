@@ -7,52 +7,52 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.domains.contracts.repositories.ActorRepository;
-import com.example.domains.contracts.services.ActorService;
-import com.example.domains.entities.Actor;
+import com.example.domains.contracts.repositories.PaymentRepository;
+import com.example.domains.contracts.services.PaymentService;
+import com.example.domains.entities.Payment;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
 @Service
-public class ActorServiceImpl implements ActorService {
-	private ActorRepository dao;
+public class PaymentServiceImpl implements PaymentService {
+	private PaymentRepository dao;
 	
-	public ActorServiceImpl(ActorRepository dao) {
+	public PaymentServiceImpl(PaymentRepository dao) {
 		this.dao = dao;
 	}
 	
 	@Override
-	public List<Actor> getAll() {
+	public List<Payment> getAll() {
 		return dao.findAll();
 	}
 	
 	@Override
-	public Iterable<Actor> getAll(Sort sort) {
+	public Iterable<Payment> getAll(Sort sort) {
 		return dao.findAll(sort);
 	}
 	@Override
-	public Page<Actor> getAll(Pageable pageable) {
+	public Page<Payment> getAll(Pageable pageable) {
 		return dao.findAll(pageable);
 	}
 	
 	@Override
 	public <T> List<T> getByProjection(Class<T> type) {
-		return dao.findByActorIdIsNotNull(type);
+		return dao.findByPaymentIdIsNotNull(type);
 	}
 
 	@Override
 	public <T> Iterable<T> getByProjection(Sort sort, Class<T> type) {
-		return dao.findByActorIdIsNotNull(sort, type);
+		return dao.findByPaymentIdIsNotNull(sort, type);
 	}
 
 	@Override
 	public <T> Page<T> getByProjection(Pageable pageable, Class<T> type) {
-		return dao.findByActorIdIsNotNull(pageable, type);
+		return dao.findByPaymentIdIsNotNull(pageable, type);
 	}
 
 	@Override
-	public Actor getOne(Integer id) throws NotFoundException {
+	public Payment getOne(Integer id) throws NotFoundException {
 		var item = dao.findById(id);
 		if(item.isEmpty())
 			throw new NotFoundException();
@@ -60,35 +60,34 @@ public class ActorServiceImpl implements ActorService {
 	}
 	
 	@Override
-	public Actor add(Actor item) throws DuplicateKeyException, InvalidDataException {
+	public Payment add(Payment item) throws DuplicateKeyException, InvalidDataException {
 		if(item == null)
 			throw new IllegalArgumentException();
-		if(dao.findById(item.getActorId()).isPresent())
+		if(dao.findById(item.getPaymentId()).isPresent())
 			throw new DuplicateKeyException();
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
 		return dao.save(item);
 	}
 	@Override
-	public Actor change(Actor item) throws NotFoundException, InvalidDataException  {
+	public Payment change(Payment item) throws NotFoundException, InvalidDataException  {
 		if(item == null)
 			throw new IllegalArgumentException();
-		if(dao.findById(item.getActorId()).isEmpty())
+		if(dao.findById(item.getPaymentId()).isEmpty())
 			throw new NotFoundException();
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
 		return dao.save(item);
 	}
 	@Override
-	public void delete(Actor item) {
+	public void delete(Payment item) {
 		if(item == null)
 			throw new IllegalArgumentException();
-		deleteById(item.getActorId());
+		deleteById(item.getPaymentId());
 		
 	}
 	@Override
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
 	}
-
 }

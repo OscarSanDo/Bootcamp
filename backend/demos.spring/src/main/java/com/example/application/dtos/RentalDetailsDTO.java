@@ -1,10 +1,10 @@
 package com.example.application.dtos;
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 import java.util.List;
 
-import javax.transaction.Transactional;
+
 
 
 import com.example.domains.entities.Rental;

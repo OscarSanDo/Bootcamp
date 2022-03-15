@@ -2,15 +2,15 @@
 
 // Actividad 1
 
-function devuelveNumeroRDM(min, max) {
-    return Math. trunc((Math.random() * (max - min) + min));
-  }
+// function devuelveNumeroRDM(min, max) {
+//     return Math. trunc((Math.random() * (max - min) + min));
+//   }
 
 
-let numRdm = devuelveNumeroRDM(1, 100);
-console.log(numRdm);
-alert("pulsa el boton para generar un número aleatorio");
-alert(`El número Ramdom es ` + numRdm);
+// let numRdm = devuelveNumeroRDM(1, 100);
+// console.log(numRdm);
+// alert("pulsa el boton para generar un número aleatorio");
+// alert(`El número Ramdom es ` + numRdm);
 
 
 //Actividad 2
@@ -50,3 +50,9 @@ alert(`El número Ramdom es ` + numRdm);
 
     //Actividad 3
 
+const miArray = [];
+miArray[0]= 1;
+miArray[1]= 2;
+miArray[2]= 3;
+miArray[3]= 4;
+miArray[4]= 5;

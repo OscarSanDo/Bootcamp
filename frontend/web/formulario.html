@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./theme/style2.css">
+    <title>Pizzaiolo</title>
+</head>
+<body>
+    <img src="../web/images/logo.png" width="100%" height="auto">
+    <div class="pizza-container-header">
+        <div class="pizza-botonera">
+            <button onclick="window.location.href='../web/home.html'" href="" class="button-header">Inicio</button>
+            <button onclick="window.location.href='../web/formulario.html'" class="button-header">Hacer un pedido</button>
+            <button onclick="window.location.href='../web/home.html'" class="button-header">Menu</button>
+            <button onclick="window.location.href='../web/home.html'" class="button-header">Quienes somos</button>
+            <button onclick="window.location.href='../web/home.html'" class="button-header">Contacta</button>
+        </div>
+        <div class="pizza-formulario">
+            <div class="container">
+                <form method="get">
+                    <h1>Persona</h1>
+                    <ul class="flex-outer">
+                        <li>
+                            <label for="first-name">Nombre</label>
+                            <input type="text" id="first-name" placeholder="Escribe aquí tu nombre">
+                        </li>
+                        <li>
+                            <label for="first-name">Elige una forma de pago</label>
+                            <select type="checkbox" id="twenty-to-twentynine">
+                                <option>Tarjeta de crédito</option>
+                                <option>Paypal</option>
+                                <option>Transferencia bancaria</option>
+                                <option>Bitcoin</option>
+                            </select>
+                        </li>
+                        <li>
+                            <label for="message">Comentario</label>
+                            <textarea rows="6" id="message" placeholder="Escribe aquí tu comentario"></textarea>
+                          </li>
+                        <li>
+                            <p>Rango de edad</p>
+                            <ul class="flex-inner">
+                              <li>
+                                <input type="checkbox" id="twenty-to-twentynine">
+                                <label for="twenty-to-twentynine">18-29</label>
+                              </li>
+                              <li>
+                                <input type="checkbox" id="thirty-to-thirtynine">
+                                <label for="thirty-to-thirtynine">30-39</label>
+                              </li>
+                              <li>
+                                <input type="checkbox" id="fourty-to-fourtynine">
+                                <label for="fourty-to-fourtynine">40-49</label>
+                              </li>
+                              <li>
+                                <input type="checkbox" id="fifty-to-fiftynine">
+                                <label for="fifty-to-fiftynine">50-65</label>
+                              </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <button name="boton" type="submit" value="Submit">Enviar</button>
+                            <button type="reset" value="Borrar">Borrar</button>
+                            <button type="button">Saluda</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

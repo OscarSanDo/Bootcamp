@@ -194,7 +194,8 @@ class JuegoDelNumeroClass {
 
 
 	constructor() {
-		inicializar();
+		this.inicializar();
+		this.comenzarJuego();
 	}
 	
 
@@ -207,8 +208,8 @@ class JuegoDelNumeroClass {
 	  };
 	
 	
-	 comenzarJuego () {
-		
+	 comenzarJuego() {
+
 		this.numeroUsuario;
 	
 		do {
@@ -218,7 +219,7 @@ class JuegoDelNumeroClass {
 		} while (!this.getTerminado());
 	}
 	
-	comenzarJuego();
+	
 		  
 	jugada (num) {
 		this.intentos --;

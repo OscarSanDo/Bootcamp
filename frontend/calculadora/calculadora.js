@@ -15,7 +15,8 @@ class Calculadora {
 
     calcula(operando2,nuevoOperador){
         if (!this.isOperacion(nuevoOperador)) {
-            throw new Error("Operación no soportada.");
+           return ("Operación no soportada.");
+           // throw new Error("Operación no soportada.");
         }
         this.operando = operando2;
         switch (this.operadorPendiente) {
@@ -37,31 +38,13 @@ class Calculadora {
             case '=':
                 break;
             default:
-                throw new Error("Operación no soportada.");
+                //throw new Error("Operación no soportada.");
+                return ("Operación no soportada.");
         }
         this.operadorPendiente = nuevoOperador;
         return this.getAcumulado();
     }
-
-    static Operacion = class {
-        constructor(operando, operador){
-            const OPERACIONES_SOPORTADAS = "+-*/=%";
-            if(!operador.include(OPERACIONES_SOPORTADAS)) throw new Error('Operador no Valido');
-            if( !operando.include(',') ){                
-                this.operando = Number.parseDouble(operando.replace(',','.'));
-            }else{
-                this.operando = operando;
-            }
-            this.operador = operador;
-        }
         
-        getOperando() {
-            return this.operando;
-        }
-        getOperador() {
-            return this.operador;
-        }
-    }
 }
 
 let pantalla = document.getElementById('screen');
@@ -72,13 +55,7 @@ let resultado = false;
 for (const button of buttons) {
     button.addEventListener('click', function(evento) {
         evento.preventDefault();
-        //debugger;
-        // if(pantalla.textContent === "" && OPERACIONES_SOPORTADAS.includes(evento.target.dataset.key) ){
-        //     return;
-        // }
-        // if( OPERACIONES_SOPORTADAS.includes(evento.target.dataset.key) && isNaN(Number.parseFloat(pantalla.textContent)) ){
-        //     return;
-        // }
+      
         if (evento.target.dataset.key == 'equal' && !OPERACIONES_SOPORTADAS.includes(pantalla.textContent.slice(-1)) ) {
             let calc = new Calculadora();
             let descomponer = pantalla.textContent.split("");

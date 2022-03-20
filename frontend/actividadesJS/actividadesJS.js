@@ -21,8 +21,8 @@ function JuegoDelNumero() {
 		let cadUsuario;
 		let numeroRandom = devuelveNumeroRDM(); // genera el numero aleatorio
 
-	// 	alert("Adivina el número entre 0 y 100");
-	// 	alert("Tienes 10 intentos.");
+		alert("Adivina el número entre 0 y 100");
+		alert("Tienes 10 intentos.");
 		
 
 		do {
@@ -126,130 +126,130 @@ function esPalindromo(frase) {
 	
   }
 
-// //Actividad 7
+//Actividad 7
 
-// function JuegoDelNumero(){
+function JuegoDelNumero(){
 
-// this.inicializar = function () {
-//     this.intentos = 10;
-// 	this.numeroRandom = devuelveNumeroRDM(0, 100);
-//    	this.mensaje = "Pendiente de empezar";
-//     this.finalizarJuego = false;
+this.inicializar = function () {
+    this.intentos = 10;
+	this.numeroRandom = devuelveNumeroRDM(0, 100);
+	this.mensaje = "Pendiente de empezar";
+    this.finalizarJuego = false;
     
-//   };
+  };
 
-//   this.inicializar();
+  this.inicializar();
 
 
 
-//  this.comenzarJuego = function () {
+ this.comenzarJuego = function () {
 	
-// 	numeroUsuario;
+	numeroUsuario;
 
-// 	do {
-// 		numeroUsuario = parseInt(prompt("Adivina el número secreto que está entre 0 Y 100, tienes 10 intentos para acertarlo, introduce un número "));
-// 			this.jugada(numeroUsuario);
-// 		alert(this.getMensaje());
-// 	} while (!this.getTerminado());
-// }
+	do {
+		numeroUsuario = parseInt(prompt("Adivina el número secreto que está entre 0 Y 100, tienes 10 intentos para acertarlo, introduce un número "));
+			this.jugada(numeroUsuario);
+		alert(this.getMensaje());
+	} while (!this.getTerminado());
+}
 
-// this.comenzarJuego;
-  	
-//   this.jugada = function (num) {
-// 	this.intentos --;
-// 	if (num > this.numeroRandom) {
-// 	this.mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
-// 		} 	
-// 	else if (num < this.numeroRandom) {
-// 	this.mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
-// 		} 	
-// 	else {
-// 	this.mensaje = "Has acertado el número secreto, has necesitado " + (10 - (this.intentos)) + " intentos.";
+this.comenzarJuego;
 
-// 	this.finalizarJuego = true;
-// 	return;
-// 		}
+  this.jugada = function (num) {
+	this.intentos --;
+	if (num > this.numeroRandom) {
+	this.mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
+		} 	
+	else if (num < this.numeroRandom) {
+	this.mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
+		} 	
+	else {
+	this.mensaje = "Has acertado el número secreto, has necesitado " + (10 - (this.intentos)) + " intentos.";
 
-// if (this.intentos == 0) {
-// 	this.finalizarJuego = true;
-// 	this.mensaje = "No te quedan intentos, has perdido la partida. El número secreto era: " + this.numeroRandom;
+	this.finalizarJuego = true;
+	return;
+		}
 
-// 		}
-//   }
+if (this.intentos == 0) {
+	this.finalizarJuego = true;
+	this.mensaje = "No te quedan intentos, has perdido la partida. El número secreto era: " + this.numeroRandom;
 
-//   	this.getMensaje = function() {
-//         return this.mensaje;
-//     }
-//     this.getTerminado = function() {
-//         return this.finalizarJuego;
-//     }
-//   	this.getJugada = function() {
-//         return 10 - this.intentos;
-//     }
-// }
+		}
+  }
 
-// // //Actividad 8
+	this.getMensaje = function() {
+        return this.mensaje;
+    }
+    this.getTerminado = function() {
+        return this.finalizarJuego;
+    }
+	this.getJugada = function() {
+        return 10 - this.intentos;
+    }
+}
 
-// class JuegoDelNumeroClass {
+// //Actividad 8
+
+class JuegoDelNumeroClass {
 
 
-// 	constructor() {
-// 		this.inicializar();
-// 		this.comenzarJuego();
-// 	}
+	constructor() {
+		this.inicializar();
+		this.comenzarJuego();
+	}
 	
 
-// 	inicializar () {
-// 		this.intentos = 10;
-// 		this.numeroRandom = devuelveNumeroRDM(0, 100);
-// 		this.mensaje = "Pendiente de empezar";
-// 		this.finalizarJuego = false;
+	inicializar () {
+		this.intentos = 10;
+		this.numeroRandom = devuelveNumeroRDM(0, 100);
+		this.mensaje = "Pendiente de empezar";
+		this.finalizarJuego = false;
 		
-// 	  };
+	}
 	
 	
-// 	 comenzarJuego() {
+	comenzarJuego() {
 
-// 		this.numeroUsuario;
+		this.numeroUsuario;
 	
-// 		do {
-// 			this.numeroUsuario = parseInt(prompt("Adivina el número secreto que está entre 0 Y 100, tienes 10 intentos para acertarlo, introduce un número "));
-// 				this.jugada(this.numeroUsuario);
-// 			alert(this.getMensaje());
-// 		} while (!this.getTerminado());
-// 	}
+		do {
+			this.numeroUsuario = parseInt(prompt("Adivina el número secreto que está entre 0 Y 100, tienes 10 intentos para acertarlo, introduce un número "));
+				this.jugada(this.numeroUsuario);
+			alert(this.getMensaje());
+		} while (!this.getTerminado());
+	}
 	
 	
-		  
-// 	jugada (num) {
-// 		this.intentos --;
-// 		if (num > this.numeroRandom) {
-// 		this.mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
-// 			} 	
-// 		else if (num < this.numeroRandom) {
-// 		this.mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
-// 			} 	
-// 		else {
-// 		this.mensaje = "Has acertado el número secreto, has necesitado " + (10 - (this.intentos)) + " intentos.";
 	
-// 		this.finalizarJuego = true;
-// 		return;
-// 			}
+	jugada (num) {
+		this.intentos --;
+		if (num > this.numeroRandom) {
+		this.mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
+			} 	
+		else if (num < this.numeroRandom) {
+		this.mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
+			} 	
+		else {
+		this.mensaje = "Has acertado el número secreto, has necesitado " + (10 - (this.intentos)) + " intentos.";
 	
-// 	if (this.intentos == 0) {
-// 		this.finalizarJuego = true;
-// 		this.mensaje = "No te quedan intentos, has perdido la partida. El número secreto era: " + this.numeroRandom;
+		this.finalizarJuego = true;
+		return;
+			}
 	
-// 			}
-// 	  }
+	if (this.intentos == 0) {
+		this.finalizarJuego = true;
+		this.mensaje = "No te quedan intentos, has perdido la partida. El número secreto era: " + this.numeroRandom;
 	
-// 	getMensaje() {
-// 			return this.mensaje;
-// 		}
-// 	getTerminado() {
-// 			return this.finalizarJuego;
-// 		}
-// 	getJugada() {
-// 			return 10 - this.intentos;
-// 		}
-// 	}
+			}
+	}
+	
+	getMensaje() {
+			return this.mensaje;
+		}
+	getTerminado() {
+			return this.finalizarJuego;
+		}
+	getJugada() {
+			return 10 - this.intentos;
+		}
+	}

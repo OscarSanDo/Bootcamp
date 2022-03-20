@@ -62,13 +62,13 @@ describe('Pruebas de los ejercicios', ()=> {
     describe('Ejercicio 6', ()=> {
         describe('Es Palindromo', () => {
             ['oso', 'Anita lava la tina', 'Anita lava la tina'].forEach(caso => {
-                it(`NIF: ${caso}`, () => expect(esPalindromo(caso)).toMatch('es palíndromo'))
+                it(`palindromo: ${caso}`, () => expect(esPalindromo(caso)).toMatch('es palíndromo'))
             })
         });
 
         describe('No es Palindromo', () => {
              ['jamon', 'el perro verde', 'no es palindromo'].forEach(caso => {
-                it(`NIF: ${caso}`, () => expect(esPalindromo(caso)).toMatch('no es palíndromo'))
+                it(`palindromo: ${caso}`, () => expect(esPalindromo(caso)).toMatch('no es palíndromo'))
             })
         });
     });

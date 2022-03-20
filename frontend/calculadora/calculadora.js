@@ -61,6 +61,7 @@ for (const button of buttons) {
             let descomponer = pantalla.textContent.split("");
             let operando = "";
             let operandoPendiente = "";
+            
             descomponer.forEach(elemento => {
                 if(!OPERACIONES_SOPORTADAS.includes(elemento)){
                      operando = operando + elemento;

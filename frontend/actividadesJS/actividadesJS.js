@@ -128,65 +128,65 @@ function esPalindromo(frase) {
 
 //Actividad 7
 
-function JuegoDelNumero(){
+// function JuegoDelNumero(){
 
-this.inicializar = function () {
-    this.intentos = 10;
-	this.numeroRandom = devuelveNumeroRDM(0, 100);
-	this.mensaje = "Pendiente de empezar";
-    this.finalizarJuego = false;
+// this.inicializar = function () {
+//     this.intentos = 10;
+// 	this.numeroRandom = devuelveNumeroRDM(0, 100);
+// 	this.mensaje = "Pendiente de empezar";
+//     this.finalizarJuego = false;
     
-  };
+//   };
 
-  this.inicializar();
+//   this.inicializar();
 
 
 
- this.comenzarJuego = function () {
+//  this.comenzarJuego = function () {
 	
-	numeroUsuario;
+// 	numeroUsuario;
 
-	do {
-		numeroUsuario = parseInt(prompt("Adivina el número secreto que está entre 0 Y 100, tienes 10 intentos para acertarlo, introduce un número "));
-			this.jugada(numeroUsuario);
-		alert(this.getMensaje());
-	} while (!this.getTerminado());
-}
+// 	do {
+// 		numeroUsuario = parseInt(prompt("Adivina el número secreto que está entre 0 Y 100, tienes 10 intentos para acertarlo, introduce un número "));
+// 			this.jugada(numeroUsuario);
+// 		alert(this.getMensaje());
+// 	} while (!this.getTerminado());
+// }
 
-this.comenzarJuego;
+// this.comenzarJuego;
 
-  this.jugada = function (num) {
-	this.intentos --;
-	if (num > this.numeroRandom) {
-	this.mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
-		} 	
-	else if (num < this.numeroRandom) {
-	this.mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
-		} 	
-	else {
-	this.mensaje = "Has acertado el número secreto, has necesitado " + (10 - (this.intentos)) + " intentos.";
+//   this.jugada = function (num) {
+// 	this.intentos --;
+// 	if (num > this.numeroRandom) {
+// 	this.mensaje = "El número secreto es MENOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
+// 		} 	
+// 	else if (num < this.numeroRandom) {
+// 	this.mensaje = "El número secreto es MAYOR que " + num + ", te quedan " + (this.intentos) + " intentos.";
+// 		} 	
+// 	else {
+// 	this.mensaje = "Has acertado el número secreto, has necesitado " + (10 - (this.intentos)) + " intentos.";
 
-	this.finalizarJuego = true;
-	return;
-		}
+// 	this.finalizarJuego = true;
+// 	return;
+// 		}
 
-if (this.intentos == 0) {
-	this.finalizarJuego = true;
-	this.mensaje = "No te quedan intentos, has perdido la partida. El número secreto era: " + this.numeroRandom;
+// if (this.intentos == 0) {
+// 	this.finalizarJuego = true;
+// 	this.mensaje = "No te quedan intentos, has perdido la partida. El número secreto era: " + this.numeroRandom;
 
-		}
-  }
+// 		}
+//   }
 
-	this.getMensaje = function() {
-        return this.mensaje;
-    }
-    this.getTerminado = function() {
-        return this.finalizarJuego;
-    }
-	this.getJugada = function() {
-        return 10 - this.intentos;
-    }
-}
+// 	this.getMensaje = function() {
+//         return this.mensaje;
+//     }
+//     this.getTerminado = function() {
+//         return this.finalizarJuego;
+//     }
+// 	this.getJugada = function() {
+//         return 10 - this.intentos;
+//     }
+// }
 
 // //Actividad 8
 
@@ -195,7 +195,7 @@ class JuegoDelNumeroClass {
 
 	constructor() {
 		this.inicializar();
-		this.comenzarJuego();
+		//this.comenzarJuego();
 	}
 	
 

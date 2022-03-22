@@ -7,16 +7,20 @@ import { ERROR_LEVEL } from 'src/lib/my-core/services/logger.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CommonServicesModule } from './common-services';
 import { MainModule } from './main';
 import { SecurityModule } from './security';
+import { DemosComponent } from './demos/demos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DemosComponent,
   ],
   imports: [
     BrowserModule, FormsModule,
-    AppRoutingModule, MainModule, SecurityModule, MyCoreModule
+    AppRoutingModule, MainModule, SecurityModule,
+     MyCoreModule, CommonServicesModule
   ],
   providers: [
     LoggerService,

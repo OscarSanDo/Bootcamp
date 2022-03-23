@@ -1,14 +1,16 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotificationComponent } from './notification/notification.component';
+import { HomeComponent } from './home/home.component';
 
 
 
 @NgModule({
   declarations: [
-    NotificationComponent
+    NotificationComponent,
+    HomeComponent,
   ],
-  exports: [NotificationComponent],
+  exports: [NotificationComponent, HomeComponent,],
   imports: [
     CommonModule
   ]

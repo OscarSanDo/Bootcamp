@@ -7,7 +7,7 @@ import { LoggerService } from 'src/lib/my-core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'App de Prueba';
+
 
 
   // constructor(private out: LoggerService){

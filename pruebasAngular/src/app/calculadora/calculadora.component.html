@@ -1,0 +1,27 @@
+
+
+  <div class="calculator">
+    <div class="screen" >{{input}}</div>
+    <div class="screen" >{{result}}</div>
+    <ul class="buttons">
+        <li><a class="buttons" (click)="borrarTodo()">C</a></li>
+        <li><a class="buttons" (click)="borrar()">DEL</a></li>
+        <li><a class="buttons" (click)="pressOperador('/')">/</a></li>
+        <li><a class="buttons" (click)="pressOperador('*')">x</a></li>
+        <li><a class="buttons" (click)="pressNum('7')">7</a></li>
+        <li><a class="buttons" (click)="pressNum('8')">8</a></li>
+        <li><a class="buttons" (click)="pressNum('9')">9</a></li>
+        <li><a class="buttons" (click)="pressOperador('-')">-</a></li>
+        <li><a class="buttons" (click)="pressNum('4')">4</a></li>
+        <li><a class="buttons" (click)="pressNum('5')">5</a></li>
+        <li><a class="buttons" (click)="pressNum('6')">6</a></li>
+        <li><a class="buttons" (click)="pressOperador('+')">+</a></li>
+        <li><a class="buttons" (click)="pressNum('1')">1</a></li>
+        <li><a class="buttons" (click)="pressNum('2')">2</a></li>
+        <li><a class="buttons" (click)="pressNum('3')">3</a></li>
+        <li><a class="buttons" (click)="getResultado()" class="equal tall">=</a></li>
+        <li><a class="wide shift" (click)="pressNum('0')">0</a></li>
+        <li><a class="shift" (click)="pressNum('.')">.</a></li>
+    </ul>
+</div>
+

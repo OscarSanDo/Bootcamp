@@ -7,13 +7,17 @@ import { CommonServicesModule } from '../common-services';
 import { CONTACTOS_COMPONENTES } from './componente.component';
 
 
-
 @NgModule({
-  declarations: [CONTACTOS_COMPONENTES],
-  exports:[ CONTACTOS_COMPONENTES],
+  declarations: [
+    CONTACTOS_COMPONENTES
+  ],
+  exports: [ CONTACTOS_COMPONENTES, ],
   imports: [
-    CommonModule, FormsModule, RouterModule.forChild([]),
-MyCoreModule, CommonServicesModule,
-  ]
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild([]),
+    MyCoreModule,
+    CommonServicesModule,
+  ],
 })
-export class ContactosModule { }
+export class ContactosModule {}

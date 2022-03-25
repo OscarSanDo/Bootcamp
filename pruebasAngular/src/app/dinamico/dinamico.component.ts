@@ -3,7 +3,8 @@ import { CalculadoraComponent } from '../calculadora/calculadora.component';
 import { HomeComponent } from '../main/home/home.component';
 import { DemosComponent } from '../demos/demos.component';
 import { FormularioComponent } from '../formulario/formulario.component';
-import { ContactosAddComponent } from '../contactos/componente.component';
+import { ContactosComponent } from '../contactos/componente.component';
+
 
 @Component({
   selector: 'app-dinamico',
@@ -12,12 +13,11 @@ import { ContactosAddComponent } from '../contactos/componente.component';
 })
 export class DinamicoComponent implements OnInit {
   menu = [
-    {texto: 'contactos', icono: 'fa-solid fa-chalkboard-user', componente: ContactosAddComponent},
-    { texto: 'formulario', icono: 'fa-solid fa-chalkboard-user', componente: FormularioComponent},
-    { texto: 'inicio', icono: 'fa-solid fa-house', componente: HomeComponent},
-    { texto: 'demos', icono: 'fa-solid fa-chalkboard-user', componente: DemosComponent},
-    { texto: 'calculadora', icono: 'fa-solid fa-calculator', componente: CalculadoraComponent },
-    // { texto: 'upload', icono: 'fa-solid fa-file-arrow-up', componente: UploadComponent},
+    {texto: 'Contactos', icono: 'fa-solid fa-user', componente: ContactosComponent},
+    {texto: 'Formulario', icono: 'fa-solid fa-pencil', componente:FormularioComponent},
+    {texto: 'Calculadora', icono: 'fa-solid fa-calculator', componente:CalculadoraComponent},
+    {texto: 'Inicio', icono: 'fa-solid fa-house', componente:HomeComponent},
+    {texto: 'Demos', icono: 'fa-solid fa-chalkboard-user', componente:DemosComponent},
   ]
   actual = this.menu[0].componente
 

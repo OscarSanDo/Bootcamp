@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CalculadoraComponent } from '../calculadora/calculadora.component';
-import { HomeComponent } from '../main/home/home.component';
-import { DemosComponent } from '../demos/demos.component';
+import { CalculadoraComponent } from 'src/app/calculadora/calculadora.component';
+import { DemosComponent } from 'src/app/demos/demos.component';
+
 import { FormularioComponent } from '../formulario/formulario.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-dinamico',

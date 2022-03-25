@@ -7,21 +7,24 @@ import { ERROR_LEVEL, LoggerService, MyCoreModule } from 'src/lib/my-core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainModule } from './main';
+import { HttpClientModule } from '@angular/common/http';
 import { SecurityModule } from './security';
 import { DemosComponent } from './demos/demos.component';
 import { CommonServicesModule } from './common-services';
-import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
+import { DinamicoComponent } from './dinamico/dinamico.component';
+import { FormularioComponent } from './formulario/formulario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DemosComponent,
     DinamicoComponent,
-    CalculadoraComponent
+    CalculadoraComponent,
+    FormularioComponent,
   ],
   imports: [
-    BrowserModule, FormsModule,
+    BrowserModule, FormsModule, HttpClientModule,
     AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule,
   ],
   providers: [

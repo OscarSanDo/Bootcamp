@@ -12,7 +12,8 @@ import { CommonComponentModule } from '../common-component';
   declarations: [
     CONTACTOS_COMPONENTES
   ],
-  exports: [ CONTACTOS_COMPONENTES, ],
+  exports: [ CONTACTOS_COMPONENTES,
+  ],
   imports: [
     CommonModule,
     FormsModule,
